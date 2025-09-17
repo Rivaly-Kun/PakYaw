@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=no">
+
+
+
+
+    <title>Dashboard - Admin Dashboard</title>
+    
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+    
+    <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+
+    <style>
+        body{
+            overflow-y: hidden;
+        }
+       .card-body1{
+        max-height: 35%;
+        height: 290px; /* Adjust the height as needed */
+        overflow-y: auto; /* Add a scrollbar if content overflows */
+    }
+
+
+
+
+    .card222 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
+        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+        border-radius: 8px; /* Optional: Rounds the corners of the card */
+        background-color: lightgreen;
+        height: 80%;
+    }
+
+    .card222:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
+        transform: scale(1.05);
+    }
+
+
+    .card23 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
+        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+        border-radius: 8px; /* Optional: Rounds the corners of the card */
+        background-color: lightblue;
+        height: 80%;
+    }
+
+    .card23:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
+        transform: scale(1.05);
+    }
+
+
+    .card24 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
+        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+        border-radius: 8px; /* Optional: Rounds the corners of the card */
+        background-color: lightsalmon;
+        height: 80%;
+    }
+
+    .card24:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
+        transform: scale(1.05);
+    }
+
+    .card25 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
+        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+        border-radius: 8px; /* Optional: Rounds the corners of the card */
+        background-color: yellow;
+        height: 80%;
+    }
+
+    .card25:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
+        transform: scale(1.05);
+    }
+</style>
+
+
+
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                    <img src="assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+
+
+                        <li class='sidebar-title'>Main Menu</li>
+
+
+
+                        <li class="sidebar-item ">
+
+                            <a href="index.html" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i> 
+                                <span>Dashboard</span>
+                            </a>
+
+
+                        </li>
+
+
+
+
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i> 
+                                <span>File maintenance</span>
+                            </a>
+
+
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="file maintainance/drivers.html">Drivers</a>
+                                </li>
+                                <li>
+                                    <a href="file maintainance/fleetOwner.html">Fleet Owner</a>
+                                </li>
+                                <li>
+                                    <a href="file maintainance/Passenger.html" >Passenger</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="file maintainance/vehicleT.html">Vehicle type</a>
+                                </li>
+                                <li>
+                                    <a href="file maintainance/utilities.html">Promos</a>
+                                </li>
+                                <li>
+                                    <a href="file maintainance/discount.html">Discounts</a>
+                                </li>
+                                
+
+                            </ul>
+
+                        </li>
+
+
+
+
+
+
+
+
+
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i> 
+                                <span>Utilities</span>
+                            </a>
+
+
+                            <ul class="submenu ">
+
+                                
+                                <li>
+                                    <a href="file maintainance/driverDocumentRequirements.html"> Driver Document Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="file maintainance/fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="/system/utilities/ChargeAndKm.html" >Charge/Base Km</a>
+                                </li>
+                                <li>
+                                    <a href="/system/utilities/Tax.html" >Tax</a>
+                                </li>
+                                </ul>
+
+                            </li>
+
+
+
+
+
+
+
+
+
+                            <li class="sidebar-item  has-sub">
+
+                                <a href="#" class='sidebar-link'>
+                                    <i data-feather="briefcase" width="20"></i> 
+                                    <span>Reports</span>
+                                </a>
+
+
+                                <ul class="submenu ">
+
+
+                                    <li>
+                                        <a href="reports/report.html">Admin Logs</a>
+                                    </li>
+                                    <li>
+                                        <a href="reports/report-submenu/completedRides.html" >Completed Rides</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                                    </li>
+    
+                                    <li>
+                                        <a href="reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                                    </li>
+                                    <li>
+                                        <a href="reports/report-submenu/taxReport.html">Tax Reports</a>
+                                    </li>
+                                    <li>
+                                        <a href="reports/report-submenu/salesReport.html">Sales Reports</a>
+    
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+
+                    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+                </div>
+            </div>
+            <div id="main">
+                <nav class="navbar navbar-header navbar-expand navbar-light">
+
+                    <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                            <li class="dropdown nav-icon">
+                                <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                                    <div class="d-lg-inline-block" style="color:white;">
+                                        <i data-feather="bell"></i>
+                                         <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                    <h6 class='py-2 px-4'>Notifications</h6>
+                                    <ul class="list-group rounded-none">
+                                        <div id="emptyOrNot">
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <div class="avatar bg-success me-3">
+                                                <span class="avatar-content"><i data-feather="bell"></i></span>
+                                            </div>
+                                            <div>
+                                                <h6 class='text-bold' id="dateNew">New Order</h6>
+                                                <p class='text-xs' id="message">
+                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='notification.html'">See All</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="dropdown nav-icon me-2">
+                                <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                    <div class="d-lg-inline-block" style="color:white;">
+                                        <i data-feather="mail"></i>
+                                        <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                        <h6 class='py-2 px-4'>Reports</h6>
+                                        <ul class="list-group rounded-none">
+                                            <div id="emptyOrNot2">
+                                                <li class="list-group-item border-0 align-items-start">
+                                                    <div class="avatar bg-success me-3">
+                                                        <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                                        <p class='text-xs' id="message2">
+                                                            An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                            <li class="list-group-item border-0 align-items-start">
+                                                <button class="btn btn-sm btn-primary" onclick="location.href='message.html'">See All</button>
+                                            </li>
+                                        </ul>
+
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                    <!--<div class="avatar me-1">
+                                        <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                                    </div>-->
+                                    <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="account.html"><i data-feather="user"></i> Account</a>
+                                    <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                                    <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                                    <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+    </nav>
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <h3>Dashboard</h3>
+                    <p class="text-subtitle text-muted"> Today's Transactions</p>
+                    <div id="error-message"></div>
+                </div>
+                <section class="section">
+                    <div class="row mb-2">
+                        <div class="col-12 col-md-3" id="completedRides">
+                            <div class="card222 card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3'>
+                                            <h3 class='card-title'>Completed Rides  </h3>
+                                            <div class="card-right" style="text-align:center; font-size: 30px;">
+                                                <p id="completed-rides">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3"id="message" onclick="location.href = 'message.html'">
+                            <div class="card23 card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3'>
+                                            <h3 class='card-title'>Incidents</h3>
+                                            <div class="card-right" style="text-align:center; font-size: 30px;">
+                                                <p id="total-sales">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3" id="cancelledRides">
+                            <div class="card24 card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3'>
+                                            <h3 class='card-title'>Canceled Rides</h3>
+                                            <div class="card-right" style="text-align:center; font-size: 30px;">
+                                                <p id="cancelled-rides">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3" id="ongoingRides">
+                            <div class="card25 card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3'>
+                                            <h3 class='card-title'>Ongoing Rides</h3>
+                                            <div class="card-right" style="text-align:center; font-size: 30px;">
+                                                <p id="ongoing-rides">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="card" style="width: 100%; height: 59.5vh;">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="padding-bottom: 10px;">
+                                <h4 class="card-title">Today's Trips</h4>
+                                <div class="input-group" style="width: 480px; margin: 0 auto;">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                                </div><br>  
+                                <div class="d-flex">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle me-1" type="button" id="statusFilter" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" ><i data-feather="filter" width="20"></i></button>
+                                        <div class="dropdown-menu" id="statusMenuFilter" aria-labelledby="status" style="margin: 0px;">
+                                            <li><a class="dropdown-item" href="#" onclick="filterTable('all')">All</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="filterTable('ongoing')">Ongoing</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="filterTable('cancelled')">Cancelled</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="filterTable('completed')">Completed</a></li>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="card-header d-flex align-items-center" style="margin-left: 2%; padding-top: 0px; padding-left: 0%; padding-right: 0%;">
+                                <div class="table-responsive" style="max-height: calc(54.5vh - 60px); height: 54vh; width: 100%;overflow-y: auto;">
+                                    <table class="" id="todaysRidesTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Trip ID</th>
+                                                <th>Driver</th>
+                                                <th>Destination</th>
+                                                <th>Status</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                 </tbody>
+                             </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card widget-todo" style="width: 30%; height: 59.5vh; margin-left: 20px;">
+                            <div class="card-header border-bottom d-flex justify-content-between align-items-center" style="padding-bottom: 0px;">
+                                <h4 class="card-title d-flex">
+                                    <i class='bx bx-check font-medium-5 pl-25 pr-75'></i>User Reports
+                                </h4>
+                            </div>
+                            <div style="max-height: calc(54.5vh - 60px); overflow-y: auto;">
+                                <div id="userReports">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                           
+
+
+
+
+
+
+
+                    <script>
+                        document.getElementById('searchInput').addEventListener('keyup', function() {
+        const searchText = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#todaysRidesTable tbody tr');
+
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            if (rowText.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+                        function setupToggleButton(buttonId, cardClass) {
+                            const toggleButton = document.getElementById(buttonId);
+                            const card = document.querySelector(`.${cardClass}`);
+
+                            toggleButton.addEventListener('click', function() {
+                                window.location.href = `./reports/report-submenu/${buttonId}.html`;
+                            });
+                        }
+
+    // Setup buttons with their corresponding card classes
+                        setupToggleButton('completedRides', 'card222');
+                        setupToggleButton('cancelledRides', 'card24');
+    setupToggleButton('ongoingRides', 'card25'); // Ensure this ID and class exists
+    function filterTable(status) {
+const rows = document.querySelectorAll('#todaysRidesTable tbody tr');
+rows.forEach(row => {
+if (status === 'all') {
+    row.style.display = '';
+} else if (row.getAttribute('data-status') === status) {
+    row.style.display = '';
+} else {
+    row.style.display = 'none';
+}
+});
+}
+</script>
+
+
+
+<script src="assets/js/feather-icons/feather.min.js"></script>
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script src="assets/vendors/chartjs/Chart.min.js"></script>
+<script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+<script src="assets/js/pages/ui-apexchart.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="bundle10.js"></script>
+<script src="bundle15.js"></script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

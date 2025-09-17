@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Dashboard - Admin Dashboard</title>
+
+   <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+
+   <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
+   <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+   <link rel="stylesheet" href="../assets/css/app.css">
+   <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+
+   <style>
+    * {
+        box-sizing: border-box;
+    }
+    .container {
+        width: 90%;
+        max-width: 100%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+         height: 556px; /* Set desired height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    }
+
+
+    .submit-btn2{
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+
+    }
+    .submit-btn2:hover{
+     background-color: lightblue;
+     transform: scale(1.05);
+     border-block: lightblue;
+     border-style: solid;
+     border-radius: 10px;
+     border-color: blue;
+ }
+
+ .button-group {
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.button-group button {
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-group button:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input-group input {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#preview-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+#preview-image2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    height: 100px;
+}
+
+.group{
+    text-align: center;
+    align-items: center;
+}
+#Error{
+    color: red;
+}
+.form-popup {
+    display: none;
+    border-radius: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #333;
+    z-index: 9;
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 600px;
+    height: fit-content;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.form-popup2 {
+    display: none;
+    border-radius: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #333;
+    z-index: 9;
+    background-color: #f9f9f9;
+    padding: 10px;
+    width: 600px;
+    height: fit-content;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+.hh1{
+    text-align: center;
+    align-items: center;
+}
+.promo-boxes{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 330px;
+  height: 420px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+
+
+}
+.heightScreen{height: 90vh;}
+.modal-backdrop {
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+/* Ensure modal is properly centered */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+/* If needed, adjust backdrop opacity */
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+.success-dialog {
+        padding: 0;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .success-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .dialog-content {
+        width: 100%;
+    }
+
+    .dialog-header {
+        background-color: #39da8a;  /* Bootstrap danger color */
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+    .dialog-header2 {
+        background-color: #ff5b5c;  /* Bootstrap danger color */
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .dialog-header h5 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.25rem;
+    }
+
+    .close-button:hover {
+        opacity: 0.8;
+    }
+
+    .dialog-body {
+        padding: 1rem;
+    }
+
+    .dialog-body h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+.dropdown-container {
+  position: relative;
+  width: 100%;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+#searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content {
+  position: absolute;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown-content div {
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-content div:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dropdown-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 8px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3;
+}
+</style>
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+    <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                    <img src="../assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+
+
+                        <li class='sidebar-title'>Main Menu</li>
+                        
+                        
+                        
+                        <li class="sidebar-item ">
+
+                            <a href="../index.html" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i> 
+                                <span>Dashboard</span>
+                            </a>
+
+                            
+                        </li>
+                        
+                        
+                        
+
+
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i> 
+                                <span>File maintenance</span>
+                            </a>
+
+                            
+
+                            <ul class="submenu active">
+
+                                <li>
+                                    <a href="drivers.html">Drivers</a>
+                                </li>
+                                <li>
+                                    <a href="fleetOwner.html">Fleet Owner</a>
+                                </li>
+                                <li>
+                                    <a href="Passenger.html" >Passenger</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="vehicleT.html">Vehicle type</a>
+                                </li>
+                                <li>
+                                    <a href="utilities.html" style="color: #053382;">Promos</a>
+                                </li>
+                                <li>
+                                    <a href="discount.html">Discounts</a>
+                                </li>
+                            </ul>                            
+                        </li>
+
+                        
+
+
+
+
+
+
+
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i> 
+                                <span>Utilities</span>
+                            </a>
+
+                            
+                            <ul class="submenu">
+                                
+                                <li>
+                                    <a href="driverDocumentRequirements.html"> Driver Document Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="/system/utilities/ChargeAndKm.html" >Charge/Base Km</a>
+                                </li>
+                                <li>
+                                    <a href="/system/utilities/Tax.html" >Tax</a>
+                                </li>
+                                
+                            </ul>
+                            
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="briefcase" width="20"></i> 
+                                <span>Reports</span>
+                            </a>
+
+                            
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="../reports/report.html">Admin Logs</a>
+                                </li>
+                                <li>
+                                    <a href="../reports/report-submenu/completedRides.html" >Completed Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="../reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                                </li>
+
+                                <li>
+                                    <a href="../reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                                </li>
+                                <li>
+                                    <a href="../reports/report-submenu/taxReport.html">Tax Reports</a>
+                                </li>
+                                <li>
+                                    <a href="../reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                                </li>
+                            </ul>
+                            
+                        </li> 
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+      <div id="main">
+        <nav class="navbar navbar-header navbar-expand navbar-light">
+
+            <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                    <li class="dropdown nav-icon">
+                        <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="bell"></i>
+                                 <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Notifications</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot">
+                                <li class="list-group-item border-0 align-items-start">
+                                    <div class="avatar bg-success me-3">
+                                        <span class="avatar-content"><i data-feather="bell"></i></span>
+                                    </div>
+                                    <div>
+                                        <h6 class='text-bold' id="dateNew">New Order</h6>
+                                        <p class='text-xs' id="message">
+                                            An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-primary btn-sm" onclick="location.href='../notification.html'">See All</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-icon me-2">
+                        <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="mail"></i>
+                                <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Reports</h6>
+                                <ul class="list-group rounded-none">
+                                    <div id="emptyOrNot2">
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <div class="avatar bg-success me-3">
+                                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                            </div>
+                                            <div>
+                                                <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                                <p class='text-xs' id="message2">
+                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <button class="btn btn-sm btn-primary" onclick="location.href='../message.html'">See All</button>
+                                    </li>
+                                </ul>
+    
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <!--<div class="avatar me-1">
+                                <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                            </div>-->
+                            <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="../account.html"><i data-feather="user"></i> Account</a>
+                            <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                            <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                            <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+</nav>
+    <div class="card">
+        <div class="heightScreen">
+            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: transparent;">
+                <h4 class="card-title">Promos</h4>
+        
+        
+                <div class="d-flex">
+                    <!-- Dropdown Button for Filtering -->
+                     <div class="d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle me-1" type="button" id="statusFilter" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" ><i data-feather="filter" width="20"></i></button>
+                            <div class="dropdown-menu" id="statusMenuFilter" aria-labelledby="status" style="margin: 0px;">
+                                <li><a class="dropdown-item" href="#" onclick="filterTable('all')">All</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="filterTable('notStarted')">Not started</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="filterTable('ongoing')">Ongoing</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="filterTable('finished')">Finished</a></li>
+                            </div>
+                        </div>
+                        </div>
+                            <button class="btn btn-primary" type="button" onclick="showPromoPopup()"><i data-feather="plus" width="20"></i>Add</button>                     </div>
+                </div>
+                <div class="card-body px-4 pb-6">
+        
+                 <!-- Search Input -->
+                 <div class="input-group" style="max-width: 780px; margin: 0 auto;">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                </div>  <br>
+                <div class="card" style="width: 100%; height: 59.5vh;">
+                    <div class="card-header d-flex align-items-center" style="padding-right: 0px; background-color: transparent;">
+                        <div class="table-responsive" style="max-height: calc(58vh - 60px); height: 58vh; width: 100%;overflow-y: auto;">
+                            <table id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Banner</th>
+                                        <th>Promo name</th>
+                                        <th>Discount</th>
+                                        <th>Start date</th>
+                                        <th>End date</th>
+                                        <th>Description</th>
+                                        <th>Vehicle Types</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-left" id="warning" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel140" style="margin-right: 100px;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                <h5 class="modal-title white" id="myModalLabel140" style="font-size: x-large;">Warning</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                                </div>
+                                <div class="modal-body" id="prompt">
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Cancel</span>
+                                </button>
+
+                                <button type="button" id="delete" class="btn btn-danger ml-1" data-bs-dismiss="modal">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Confirm</span>
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <dialog id="danger" class="success-dialog">
+                            <div class="dialog-content">
+                                <div class="dialog-header2">
+                                    <h5 style="color: white;">Error</h5>
+                                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="dialog-body">
+                                    <h1>A transaction is using this.</h1>
+                                </div>
+                            </div>
+                        </dialog>
+                        <dialog id="success" class="success-dialog">
+                            <div class="dialog-content">
+                                <div class="dialog-header">
+                                    <h5 style="color: white;">Success</h5>
+                                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="dialog-body">
+                                    <h1>Sucessfully added.</h1>
+                                </div>
+                            </div>
+                        </dialog>
+                        <dialog id="success2" class="success-dialog">
+                            <div class="dialog-content">
+                                <div class="dialog-header">
+                                    <h5 style="color: white;">Success</h5>
+                                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="dialog-body">
+                                    <h1>Sucessfully updated.</h1>
+                                </div>
+                            </div>
+                        </dialog>
+                        <dialog id="danger2" class="success-dialog">
+                            <div class="dialog-content">
+                                <div class="dialog-header2">
+                                    <h5 style="color: white;">Error</h5>
+                                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="dialog-body">
+                                    <h1>Error Occured.</h1>
+                                </div>
+                            </div>
+                        </dialog>
+
+
+
+
+
+
+
+
+
+        <!-- Popup for Adding Promo -->
+        <div id="popup" class="form-popup">
+            <form class="form-container" id="addForm">
+                <div class="hh1"><h3>Add Promo</h3></div>
+                <div class="group">
+                    <img src="https://via.placeholder.com/40" alt="Dale" id="preview-image" style="width: 100px; height: 100px;">
+                    <input type="file" id="file-selector" name="picUpload" accept="image/png, image/jpeg" required><br>
+                </div>
+                <br>
+                <div class="input-group">
+                    <label for="status" class="sr-only">Promo Type <span style="color: red; font-size: large;">*</span></label>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle me-1" type="button" id="status" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">General Promo</button>
+                                <div class="dropdown-menu" id="statusMenu" aria-labelledby="statusMenu" style="margin: 0px;">
+                                    <a class="dropdown-item" id="activeStatus">General Promo</a>
+                                    <a class="dropdown-item" id="inactiveStatus">Targeted Promo</a>
+                                </div>
+                            </div>
+                    <div class="d-flex">
+                        <div class="input-group">
+                            <label for="promoName">Promo Name<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="text" id="promoName" minlength="4" required>
+                            <label for="startDate">Start Date<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="date" id="startDate" max="2100-01-01" required>
+                            
+                        </div>
+                        <div class="input-group" style="margin-left: 2px;">
+                            <label for="discount">Discount %<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="number" id="discount" step="0.01" min="1" max="100" required>
+                            <label for="endDate">End Date<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="date" id="endDate" max="2100-01-01" required>
+                        </div>
+                    </div>
+                    <div id="vehicleTypes" style="display: none; width: 100%;">
+                        <div class="input-group" style="flex: 0.8; margin-right: 7px;">
+                            <label for="dropdown">Vehicle Types:</label>
+                            <div class="dropdown-container">
+                                <input type="text" id="vehicleSearch" placeholder="Search..." autocomplete="off" onkeyup="window.filterOptions(event)">
+                                <div id="dropdown" class="dropdown-content"></div>
+                            </div>
+                        </div>
+                        <div class="input-group" style="flex: 1.2;">
+                            <div id="appliedVehicleTypes" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label for="description">Description:</label>
+                    <textarea id="description" rows="3" minlength="5" style="width: 100%;"></textarea>
+                </div>
+                <p id="Error"></p>
+                <button type="submit" class="submit-btn1" id="add-Promo-Button">Add promo</button>
+                <button type="button" id="cancel" class="cancel-btn" onclick="closeForm()">Cancel</button>
+            </form>
+        </div>
+
+        <div id="popup2" class="form-popup2">
+            <form class="form-container" id="updateForm">
+                <div class="hh1"><h3>Edit Promo</h3><h6 id="editId"></h6></div>
+                <div class="group">
+                    <img src="https://via.placeholder.com/40" alt="Dale" id="preview-image2">
+                    <input type="file" id="file-selector2" name="picUpload" accept="image/png, image/jpeg"><br>
+                </div>
+                <br>
+                <div class="input-group">
+                    <label for="status2" class="sr-only">Promo Type <span style="color: red; font-size: large;">*</span></label>
+                            <div class="dropdown2">
+                                <button class="btn btn-primary dropdown-toggle me-1" type="button" id="status2" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" style="margin-left: 5px;">General Promo</button>
+                                <div class="dropdown-menu" id="statusMenu2" aria-labelledby="statusMenu" style="margin: 0px;">
+                                    <a class="dropdown-item" id="activeStatus2">General Promo</a>
+                                    <a class="dropdown-item" id="inactiveStatus2">Targeted Promo</a>
+                                </div>
+                            </div>
+                    <div class="d-flex">
+                        <div class="input-group">
+                            <label for="promoName">Promo Name<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="text" id="ePromoName" minlength="4" required>
+                            <label for="startDate">Start Date<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="date" id="eStartDate" max="2100-01-01" required>
+                            
+                        </div>
+                        <div class="input-group" style="margin-left: 2px;">
+                            <label for="discount">Discount %<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="number" id="eDiscount" step="0.01" min="1" max="100" required>
+                            <label for="endDate">End Date<span style="color: red; font-size: large;">*</span>:</label>
+                            <input type="date" id="eEndDate" max="2100-01-01" required>
+                        </div>
+                    </div>
+                    <div id="vehicleTypes2" style="display: none; width: 100%;">
+                        <div class="input-group" style="flex: 0.8; margin-right: 7px;">
+                            <label for="dropdown2">Vehicle Types:</label>
+                            <div class="dropdown-container">
+                                <input type="text" id="vehicleSearch2" placeholder="Search..." autocomplete="off" onkeyup="window.filterOptions2(event)">
+                                <div id="dropdown2" class="dropdown-content"></div>
+                            </div>
+                        </div>
+                        <div class="input-group" style="flex: 1.2;">
+                            <div id="appliedVehicleTypes2" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label for="description">Description:</label>
+                    <textarea id="eDescription" rows="3" minlength="5" style="width: 100%;"></textarea>
+                </div>
+                <p id="Error2"></p>
+                <button type="submit" class="submit-btn1" id="update-Promo-Button">Update</button>
+                <button type="button" id="cancel2" class="cancel-btn" onclick="closeForm()">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Popup for Adding Employee -->
+        <!-- <div id="popup-employee" class="popup-employee">
+            <h3>Add Employee</h3>
+            <label for="employeeName">Full Name:</label>
+            <input type="text" id="employeeName">
+            <label for="employeeContact">Contact:</label>
+            <input type="text" id="employeeContact">
+            <label for="employeeAddress">Address:</label>
+            <input type="text" id="employeeAddress">
+            <label for="employeeRole">Roles:</label>
+            <select id="employeeRole">
+                <option value="Admin">Admin</option>
+                <option value="Driver">Driver</option>
+                <option value="Passenger">Passenger</option>
+            </select>
+            <button class="submit-btn2" onclick="closeEmployeePopup()">Add User</button>
+        </div> -->
+
+        <script>
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').setAttribute('min', today);
+            document.getElementById('endDate').setAttribute('min', today);
+            document.getElementById('eStartDate').setAttribute('min', today);
+            document.getElementById('eEndDate').setAttribute('min', today);
+
+            const fileSelector = document.getElementById('file-selector');
+            const img = document.getElementById('preview-image');
+
+            fileSelector.addEventListener('change', (event) => {
+                const fileList = event.target.files;
+                console.log(fileList[0]);
+                readImage(fileList[0]);
+            });
+            function readImage(file) {
+                // Check if the file is an image.
+                if (file.type && !file.type.startsWith('image/')) {
+                    console.log('File is not an image.', file.type, file);
+                    return;
+                }
+                console.log("running");
+                const reader = new FileReader();
+                reader.addEventListener('load', (event) => {
+                    console.log("running");
+                    img.src = event.target.result;
+                    img.style.display = 'block';
+                });
+                reader.readAsDataURL(file);
+            }
+            
+            const openFormButton2 = document.getElementById('openFormButton2');
+            const popupForm2 = document.getElementById('popup2');
+            const openFormButton = document.getElementById('openFormButton');
+            const popupForm = document.getElementById('popup');
+
+            function closeForm() {
+                popupForm.style.display = 'none';
+                let form = document.getElementById("addForm");
+                let img = document.getElementById("preview-image");
+                img.src = 'https://via.placeholder.com/40';
+                document.getElementById('vehicleTypes').style.display = 'none';
+                form.reset();
+                popupForm2.style.display = 'none';
+                let form2 = document.getElementById("updateForm");
+                let img2 = document.getElementById("preview-image2");
+                img2.src = 'https://via.placeholder.com/40';
+                form2.reset();
+            }
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+        const searchText = this.value;
+        const rows = document.querySelectorAll('#table1 tbody tr');
+
+        rows.forEach(row => {
+            const rowText = row.textContent;
+            if (rowText.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+// Function to show the selected section
+function filterTable(status) {
+const rows = document.querySelectorAll('#table1 tbody tr');
+rows.forEach(row => {
+if (status === 'all') {
+    row.style.display = '';
+} else if (row.getAttribute('data-status') === status) {
+    row.style.display = '';
+} else {
+    row.style.display = 'none';
+}
+});
+}
+
+        </script>
+        
+
+
+
+        <script src="../assets/js/feather-icons/feather.min.js"></script>
+        <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="../assets/js/app.js"></script>
+        <script src="../assets/vendors/chartjs/Chart.min.js"></script>
+        <script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
+        <script src="../assets/js/pages/dashboard.js"></script>
+        <script src="../bundle8.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="../bundle10.js"></script>
+
+
+    </body>
+    </html>

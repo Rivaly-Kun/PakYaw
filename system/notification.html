@@ -1,0 +1,373 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=no">
+
+
+
+
+        <title>Dashboard - Admin Dashboard</title>
+        
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        
+        
+        <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+        <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+<style>
+    .heightScreen{height: 90vh;}
+    .table-responsive{
+        height: 90vh;
+    }
+</style>
+
+
+    </head>
+    <body>
+        <div id="app">
+            <div id="sidebar" class='active'>
+                <div class="sidebar-wrapper active">
+                    <div class="sidebar-header">
+                        <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                        <img src="assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+                    </div>
+                    
+                    <div class="sidebar-menu">
+                        <ul class="menu">
+                            <li class='sidebar-title'>Main Menu</li>
+
+                            <li class="sidebar-item">
+                                <a href="index.html" class='sidebar-link' data-menu="dashboard">
+                                    <i data-feather="home" width="20"></i> 
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item has-sub" id="file-maintenance">
+                                <a href="#" class='sidebar-link' data-menu="file-maintenance">
+                                    <i data-feather="triangle" width="20"></i> 
+                                    <span>File Maintenance</span>
+                                </a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="file maintainance/drivers.html">Drivers</a>
+                                    </li>
+                                    <li>
+                                        <a href="file maintainance/fleetOwner.html">Fleet Owner</a>
+                                    </li>
+                                    <li>
+                                        <a href="file maintainance/Passenger.html" >Passenger</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="file maintainance/vehicleT.html">Vehicle type</a>
+                                    </li>
+                                    <li>
+                                        <a href="file maintainance/utilities.html">Promos</a>
+                                    </li>
+                                    <li>
+                                        <a href="file maintainance/discount.html">Discounts</a>
+                                    </li>
+                                </li>
+                                </ul>
+                            </li>
+
+                            <li class="sidebar-item has-sub" id="utilities">
+                                <a href="#" class='sidebar-link' data-menu="utilities">
+                                    <i data-feather="triangle" width="20"></i> 
+                                    <span>Utilities</span>
+                                </a>
+                                <ul class="submenu ">
+
+                                    
+                                    <li>
+                                        <a href="file maintainance/driverDocumentRequirements.html"> Driver Document Requirements</a>
+                                    </li>
+                                    <li>
+                                        <a href="file maintainance/fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                                    </li>
+                                    <li>
+                                        <a href="/system/utilities/ChargeAndKm.html">Charge/Base Km</a>
+                                    </li>
+                                    <li>
+                                        <a href="/system/utilities/Tax.html" >Tax</a>
+                                    </li>
+
+                             </ul>
+                         </li>
+
+                         <li class="sidebar-item has-sub" id="reports">
+                            <a href="#" class='sidebar-link' data-menu="reports">
+                                <i data-feather="briefcase" width="20"></i> 
+                                <span>Reports</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="reports/report.html">Admin Logs</a>
+                                </li>
+                                <li>
+                                    <a href="reports/report-submenu/completedRides.html" >Completed Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                                </li>
+
+                                <li>
+                                    <a href="reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                                </li>
+                                <li>
+                                    <a href="reports/report-submenu/taxReport.html">Tax Reports</a>
+                                </li>
+                                <li>
+                                    <a href="reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+       <div id="main">
+        <nav class="navbar navbar-header navbar-expand navbar-light">
+
+            <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                    <li class="dropdown nav-icon">
+                        <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="bell"></i>
+                                 <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Notifications</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot">
+                                <li class="list-group-item border-0 align-items-start">
+                                    <div class="avatar bg-success me-3">
+                                        <span class="avatar-content"><i data-feather="bell"></i></span>
+                                    </div>
+                                    <div>
+                                        <h6 class='text-bold' id="dateNew">New Order</h6>
+                                        <p class='text-xs' id="message">
+                                            An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-primary btn-sm" onclick="location.href='notification.html'">See All</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-icon me-2">
+                        <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="mail"></i>
+                                <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Reports</h6>
+                                <ul class="list-group rounded-none">
+                                    <div id="emptyOrNot2">
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <div class="avatar bg-success me-3">
+                                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                            </div>
+                                            <div>
+                                                <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                                <p class='text-xs' id="message2">
+                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <button class="btn btn-sm btn-primary" onclick="location.href='message.html'">See All</button>
+                                    </li>
+                                </ul>
+
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <!--<div class="avatar me-1">
+                                <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                            </div>-->
+                            <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="account.html"><i data-feather="user"></i> Account</a>
+                            <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                            <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                            <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+</nav>
+
+
+
+
+
+
+                <div class="card">
+                    <div class="heightScreen">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">Document Submissions</h4>
+    
+    
+                            <div class="d-flex">
+                                <!-- Dropdown Button for Filtering -->
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle me-1" type="button" id="statusFilter" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" ><i data-feather="filter" width="20"></i></button>
+                                    <div class="dropdown-menu" id="statusMenuFilter" aria-labelledby="status" style="margin: 0px;">
+                                        <li><a class="dropdown-item" href="#" onclick="filterTable('all')">All</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="filterTable('true')">Resolved</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="filterTable('false')">Unresolved</a></li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+    
+                            <div class="card-body px-4 pb-6"><br>
+                               <!-- Search Input -->
+                               <div class="input-group" style="max-width: 780px; margin: 0 auto;">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            </div>  <br><br>
+    
+    
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Ticket ID</th>
+                                            <th>User ID</th>
+                                            <th>Message</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+    
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-status="true">
+                                            <td>Ticket-12312345</td>
+                                           <td>Driver-02233345</td>
+                                           <td>Ni kaun og bulgan na isda naka-igit na naka drive</td>
+                                           <td>09/10/2024</td>
+                                           <td><span class="badge bg-success">Verified</span></td>
+    
+                                       </tr>
+    
+                                   </tbody>
+    
+    
+    
+                               </table>
+                               <p id="noResultMessage" style="display:none; color:red;">No result found</p>
+                               <p id="notFoundMessage" style="display:none; color:red;">Not found</p>
+                           </div>
+                       </div>
+                    </div>
+               </div>
+
+
+
+
+
+
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        const searchText = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#table1 tbody tr');
+
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            if (rowText.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+// Function to show the selected section
+function filterTable(status) {
+const rows = document.querySelectorAll('#table1 tbody tr');
+rows.forEach(row => {
+if (status === 'all') {
+    row.style.display = '';
+} else if (row.getAttribute('data-status') === status) {
+    row.style.display = '';
+} else {
+    row.style.display = 'none';
+}
+});
+}
+</script>
+
+
+
+
+
+
+               <script src="assets/js/feather-icons/feather.min.js"></script>
+               <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+               <script src="assets/js/app.js"></script>
+
+               <script src="assets/vendors/chartjs/Chart.min.js"></script>
+               <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+               <script src="assets/js/pages/dashboard.js"></script>
+               <script src="assets/js/pages/ui-apexchart.js"></script>
+
+               <script src="assets/js/main.js"></script>
+               <script src="bundle25.js"></script>
+               <script src="bundle10.js"></script>
+
+
+
+
+
+
+
+           </body>
+           </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

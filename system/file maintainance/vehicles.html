@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+
+  <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
+
+  <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+
+  <style >
+    body{
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+     .form-container {
+        display: flex;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border-color: lightblue;
+        border-style: solid;
+        max-width: 1000px;
+        width: 900px;
+        height: 220px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .form-container1 {
+        display: flex;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border-color: lightblue;
+        border-style: solid;
+        max-width: 1000px;
+        width: 900px;
+        height: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-image {
+        flex: 1;
+        background: url('your-image-url.jpg') center center/cover no-repeat;
+    }
+
+    .form-content {
+        flex: 2;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+
+
+
+
+
+
+
+
+    #openFormButton {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        padding-left: 45px;
+        padding-right: 45px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        float: right;
+
+    }
+
+
+    #openFormButton:hover {
+        background-color: lightblue;
+        transform: scale(1.05);
+        border-block: lightblue;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: blue;
+    }
+
+    .form-popup {
+        display: none;
+        border-radius: 10px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 3px solid #333;
+        z-index: 9;
+        background-color: #f9f9f9;
+        padding: 20px;
+        width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-container11 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button-group {
+        display: flex;
+        border-radius: 10px;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .button-group button {
+        border-radius: 10px;
+        padding: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button-group button:hover {
+        background-color: #ddd;
+        transform: scale(1.05);
+    }
+
+    .input-group input {
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+
+
+
+    .card{
+       height: 90vh; /* Adjust the height as needed */
+       overflow-x: hidden;
+   }
+
+
+
+
+
+   .container2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 70px;
+    margin-right: 5px;
+    margin-left: 5px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+
+
+
+
+.form-container111 {
+    margin-top: 30px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    background-color: #f9f9f9;
+    bottom: 600px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.hh1{
+    text-align: center;
+    align-items: center;
+}
+
+#listOfVehicles{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+}
+
+.content {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.card2{
+     height: 90vh; /* Adjust the height as needed */
+     overflow-x: hidden;
+ }
+ .hover-cursor {
+            cursor: pointer; /* Changes cursor to a hand pointer */
+        }
+        #hide{
+            display: none;
+        }
+        #map {
+            height: 270px;
+            width: 100%;
+        }
+</style>
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+  <div id="app">
+    <div id="sidebar" class='active'>
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                <img src="../assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+
+
+                    <li class='sidebar-title'>Main Menu</li>
+
+
+
+                    <li class="sidebar-item  ">
+
+                        <a href="../index.html" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i> 
+                            <span>Dashboard</span>
+                        </a>
+
+
+                    </li>
+
+
+
+                    
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>File maintenance</span>
+                        </a>
+
+
+                        <ul class="submenu active">
+
+                            <li>
+                                <a href="drivers.html">Drivers</a>
+                            </li>
+                            <li>
+                                <a href="fleetOwner.html">Fleet Owner</a>
+                            </li>
+                            <li>
+                                <a href="Passenger.html" >Passenger</a>
+                            </li>
+                            
+                            <li>
+                                <a href="vehicleT.html">Vehicle type</a>
+                            </li>
+                            <li>
+                                <a href="utilities.html">Promos</a>
+                            </li>
+                            <li>
+                                <a href="discount.html">Discounts</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>Utilities</span>
+                        </a>
+
+
+                        <ul class="submenu ">
+
+
+                            
+                            <li>
+                                <a href="driverDocumentRequirements.html"> Driver Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="/system/utilities/ChargeAndKm.html" >Charge/Base Km</a>
+                            </li>
+                            <li>
+                                <a href="/system/utilities/Tax.html" >Tax</a>
+                            </li>
+
+
+
+                        </ul>
+
+                    </li>
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="briefcase" width="20"></i> 
+                            <span>Reports</span>
+                        </a>
+
+
+                        <ul class="submenu ">
+
+                            <li>
+                                <a href="../reports/report.html">Admin Logs</a>
+                            </li>
+                            <li>
+                                <a href="../reports/report-submenu/completedRides.html" >Completed Rides</a>
+                            </li>
+                            
+                            <li>
+                                <a href="../reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                            </li>
+
+                            <li>
+                                <a href="../reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                            </li>
+                            <li>
+                                <a href="../reports/report-submenu/taxReport.html">Tax Reports</a>
+                            </li>
+                            <li>
+                                <a href="../reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                            </li>
+                        </ul>
+
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+    <div id="main">
+        <nav class="navbar navbar-header navbar-expand navbar-light">
+
+            <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                    <li class="dropdown nav-icon">
+                        <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="bell"></i>
+                                 <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Notifications</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot">
+                                <li class="list-group-item border-0 align-items-start">
+                                    <div class="avatar bg-success me-3">
+                                        <span class="avatar-content"><i data-feather="bell"></i></span>
+                                    </div>
+                                    <div>
+                                        <h6 class='text-bold' id="dateNew">New Order</h6>
+                                        <p class='text-xs' id="message">
+                                            An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-primary btn-sm" onclick="location.href='../notification.html'">See All</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-icon me-2">
+                        <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="mail"></i>
+                                <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Reports</h6>
+                                <ul class="list-group rounded-none">
+                                    <div id="emptyOrNot2">
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <div class="avatar bg-success me-3">
+                                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                            </div>
+                                            <div>
+                                                <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                                <p class='text-xs' id="message2">
+                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <button class="btn btn-sm btn-primary" onclick="location.href='../message.html'">See All</button>
+                                    </li>
+                                </ul>
+    
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <!--<div class="avatar me-1">
+                                <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                            </div>-->
+                            <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="../account.html"><i data-feather="user"></i> Account</a>
+                            <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                            <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                            <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="row mb-4">
+                <div class="card-header align-items-center">
+                    <div class="card2">
+                        <div class="nav-container">
+
+                            <h1 class="nav-title">DRIVER</h1>
+                        </div>
+                        <!--<h3 class='card-heading p-1 pl-3'>DRIVER</h3>-->
+
+
+
+
+
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Form with Navigation and Buttons</title>
+                        </head>
+                        <body>
+                            <form>
+                                <div class="container">
+                                    <nav class="left-nav">
+                                        <div class="content1"><button id="profile_pic"> </button><br><br></div>
+
+                                        <div clss="contents1"><br>
+                                           <p id="Drivername"></p>
+                                           <p id="Contact"></p>
+                                           <p id="Email"></p>
+                                           <p id="Status"></p>
+                                           <br><br>
+
+
+                                           <!--<button type="button" id="driverDocsButton" >Driver Documents</button>-->
+
+
+
+                                           <!--<button type="button" id="vehiclesButton">Vehicles</button>-->
+                                       </nav></form><div id="map"></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                       <div class="nav-container">
+                                          <button class="nav-button" id="driverDocsButton">Driver Documents</button>
+                                          <button class="nav-button"  id="vehiclesButton">Vehicles</button>
+                                          <button class="nav-button"  id="activitiesButton">Activities</button>
+
+
+
+                                      </div>
+
+
+
+
+
+
+                                      <div class="card" id="toClose">
+                                        <div class="heightScreen">
+                                            <div class="card-header d-flex justify-content-between align-items-center">
+                                                <div class="d-flex">
+                                                    <h4 class="card-title"  style="margin-top: 6px; margin-right: 20px;">Vehicles</h4>
+                                                </div>
+                                        
+                                        
+                                                <div class="d-flex">
+                                                    <!-- Dropdown Button for Filtering -->
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle me-1" type="button" id="vehicleTypeFilter" data-bs-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false" ><i data-feather="truck" width="20"></i> </button>
+                                                        <div class="dropdown-menu" id="vehicleTypeMenuFilter" aria-labelledby="status" style="margin: 0px;">
+                                                            <li><a class="dropdown-item" href="#" onclick="filterTable('all', 'all')">All</a></li>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle me-1" type="button" id="statusFilter" data-bs-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false" ><i data-feather="filter" width="20"></i> </button>
+                                                        <div class="dropdown-menu" id="statusMenuFilter" aria-labelledby="status" style="margin: 0px;">
+                                                            <li><a class="dropdown-item" href="#" onclick="filterTable('all', 'all')">All</a></li>
+                                                            <li><a class="dropdown-item" href="#" onclick="filterTable('active', 'all')">Verified</a></li>
+                                                            <li><a class="dropdown-item" href="#" onclick="filterTable('inactive', 'all')">Unverified</a></li>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body px-4 pb-6"><br>
+                                        
+                                                 <!-- Search Input -->
+                                                 <div class="input-group" style="max-width: 780px; margin: 0 auto;">
+                                                    <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                                                </div><br>
+                                                <div class="card-header d-flex align-items-center" style="margin-left: 20px; padding-top: 0px; padding-right: 0px; padding-left: 0px;">
+                                                    <div class="table-responsive" style="max-height: calc(54.5vh - 60px); height: 54vh; width: 100%;overflow-y: auto;">
+                                                        <table class="" id="vehicleTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Vehicle Image</th>
+                                                                    <th>Vehicle Type</th>
+                                                                    <th>Model</th>
+                                                                    <th>Brand</th>
+                                                                    <th>Plate number</th>
+                                                                    <th>Status</th>
+                                                                    <th>View</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                
+                                                     </tbody>
+                                                 </table>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <!--<div class="container441" id="listOfVehicles">
+                            </div>-->
+
+
+
+
+
+
+
+
+                        <div class="card" id="hide" style="height: fit-content;">
+                            <div class="card-body px-4 pb-6">
+                                <div class="container33" id="vehicleDetails">
+                                    
+
+                                    <div class="content1">
+                                        <div class="d-lg-inline-block" style="color:black;" id="backButton">
+                                            <p class="hover-cursor"><i data-feather="chevron-left" style="width: 30; height: 30;"></i>Back</p>
+                                        </div>
+                                        <br>
+                                        <br>
+                                      <a href="#" class="sidebar-link2" onclick="toggleSubMenu(event)">
+                                       <i data-feather="layout" width="80"></i> 
+                                       <span>Vehicle details</span>
+                                   </a>
+       
+                                   <div class="submenu111">
+                                       <div class="form-container">
+       
+                                         <div class="large-box1"><img src="https://via.placeholder.com/40" id="vehicle-image" alt="Dale" width="200px" height="150px"></div>
+       
+                                         <div class="container55">
+                                           <div class="lf">
+                                               <p id="vehicle-model">Model:</p>
+                                               <p id="vehicle-make">Make:</p>
+                                               <p id="vehicle-type">Type:</p>
+                                               <p id="vehicle-plate-num">Plate number:</p>
+                                           </div>
+       
+                                 <!--  <div class="column right">
+                                       <p>Vehicle type:</p>
+                                       <p>Capacity:</p>
+                                       <p></p>
+                                   </div>-->
+       
+                               </div>
+       
+                           </div>
+       
+                       </div>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+                       <div class="content1"><br><br>
+                        <a href="#" class="sidebar-link2" onclick="toggleSubMenu(event)">
+       
+                           <i data-feather="file-text" width="80"></i> 
+                           <span>Documents</span>
+                       </a>
+       
+       
+                       <div class="submenu111">
+                           <div class="submenu22">
+       
+                              <div class="grid-container1">
+                               <div class="grid-item1"></div>
+                               <p>Vehicle Documents</p>   
+                           </div>
+       
+                           <div class="form-container" style="height: fit-content;">
+                            <div class="container555">
+        
+                                <div class="content1">
+                                 <a href="#" class="sidebar-link1">
+     
+                                     <i data-feather="file-text" width="80"></i> 
+                                     <span>OR</span>
+                                 </a>
+     
+                                 <ul id="submenu11" class="content22" style="padding: 10px;">
+                                     <div id="orUrl"></div>
+                                         <div class="grid-container1">
+                                            <div class="grid-item1"></div>
+                                            <p>Expiry date: <span id="expiryDate">date</span></p>   
+                                        </div>
+     
+                                    <div id="ordocStatus">
+     
+                                    </div><br>
+                                    <button class="btn btn-primary btn-sm" id="verifyOR">Verify</button>
+     
+     
+     
+     
+                                </ul>
+                            </div>
+     
+     
+     
+     
+                            <div class="content1" id="cpc">
+                             <a href="#" class="sidebar-link1">
+                                 <i data-feather="file-text" width="30"></i> 
+                                 <span>CR</span>
+                             </a>
+                             
+                             <ul id="submenu11" class="content22" style="padding: 10px;">
+                                 <div id="crUrl"></div>
+                                     <div class="grid-container1">
+                                        <div class="grid-item1"></div>
+                                        <p>Expiry date: <span id="expiryDate2">date</span></p>   
+                                    </div>
+     
+                                <div id="crdocStatus">
+     
+                                </div><br>
+                                <button class="btn btn-primary btn-sm" id="verifyCR">Verify</button>
+     
+                            </ul>
+                        </div>
+                        <div class="content1">
+                         <a href="#" class="sidebar-link1">
+                             <i data-feather="file-text" width="30"></i> 
+                             <span>CPC</span>
+                         </a>
+     
+                         <ul id="submenu11" class="content22" style="padding: 10px;">
+                             <div id="cpcUrl"></div>
+                                 <div class="grid-container1">
+                                    <div class="grid-item1"></div>
+                                    <p>Expiry date: <span id="expiryDate3">date</span></p>   
+                                </div>
+     
+                            <div id="cpcdocStatus">
+     
+                            </div><br>
+                            <button class="btn btn-primary btn-sm" id="verifyCPC">Verify</button>
+     
+                        </ul>
+                    </div>
+     
+                </div>
+                           </div>
+       </div>    
+       </div>
+       </div>
+       
+       
+       
+       
+               <!--<div style="padding: 20px 0px 32px 25px;">
+                 <details>
+                     <summary>Click here to see more details</summary>
+                     <p>This is the hidden content that becomes visible when you click on the summary.</p>
+                 </details>
+             </div>-->
+       
+       
+         </div>
+       
+       
+       
+       
+       
+       
+       </div>
+                            </div>
+                        </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<script>
+    function BoxFormation() {
+        const container33 = document.querySelector('.container33');
+        const container441 = document.querySelector('.container441');
+        
+        // Show .container33
+        container33.style.display = 'flex';
+
+        // Hide .container44
+        container441.style.display = 'none';
+    }
+</script>
+
+
+
+
+
+
+
+
+<script>
+    function filterTable(statusFilter, typeFilter) {
+  const rows = document.querySelectorAll('#vehicleTable tbody tr');
+  rows.forEach(row => {
+    const status = row.getAttribute('data-status');
+    const type = row.getAttribute('data-type');
+
+    if (statusFilter === 'all' && typeFilter === 'all') {
+      row.style.display = '';
+    } else if (statusFilter === 'all' && row.getAttribute('data-type') === typeFilter) {
+      row.style.display = '';
+    } else if (typeFilter === 'all' && row.getAttribute('data-status') === statusFilter) {
+      row.style.display = '';
+    } else if (row.getAttribute('data-status') === statusFilter && row.getAttribute('data-type') === typeFilter) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+        // Function to load content without blinking
+</script>
+
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIyUbQitpmfFPwOXujC2oHS0NAU1XJjGs&loading=async&libraries=maps&libraries=marker">
+    </script>
+<script src="../assets/js/feather-icons/feather.min.js"></script>
+<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/app.js"></script>
+
+<script src="../assets/vendors/chartjs/Chart.min.js"></script>
+<script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/js/pages/dashboard.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="C:/Users/gabis/Desktop/system2/systemPAKYAW3/Pakyaw-ServerSide/system/bundle6.js"></script>
+<script src="../bundle6.js"></script>
+<script src="/system/bundle10.js"></script>
+
+</body>
+</html>
+

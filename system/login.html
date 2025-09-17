@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+    <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            /*background-color: #f0f0f0;*/
+
+            /*background-image: url('assets/images/avatar/ormoc.jpg');/*
+            /* Additional properties for better control */
+            background-size: cover; /* or contain, depending on how you want the image to scale */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-position: center; /* Centers the image within the element */
+            transition: background-image 1s ease-in-out;
+        }
+        .navbar {
+    width: 100%;
+    background-color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between; /* Distributes space between the items */
+    align-items: center;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0; /* Ensure it stretches across the width */
+    right: 0; /* Ensure it stretches across the width */
+    padding-left: 40px; /* Add some padding on the left to prevent the button from being too close to the edge */
+    padding-right: 40px; /* Optional: Add padding on the right if needed */
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 10;
+    padding: 0;
+    display: flex; /* Ensure the items are aligned horizontally */
+}
+
+.navbar li {
+    margin-right:10px; /* Add spacing between items if desired */
+    margin-left: 0px;
+
+
+      display: flex;
+    align-items: center;
+}
+
+.navbar img {
+    width: 70px;
+    height: 50px;
+}
+
+.navbar h1 {
+    margin: 0;
+    display: inline; /* Ensure the heading is on the same line as the image */
+}
+
+
+.right{
+       position: absolute;
+    right: 50px;
+}
+
+
+
+        .login-container {
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            width: 520px;
+            height: 320px;
+            text-align: center;
+            display: none;
+            
+            box-shadow: 20px 25px 10px lightblue;;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: black;
+
+            transform: scale(1.05);
+            border-style: solid;
+            border-radius: 10px;
+
+        }
+        .login-button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-button:hover{
+             background-color: black;
+
+            transform: scale(1.05);
+            border-style: solid;
+            border-radius: 10px;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+        }
+        #Error{
+            color: red;
+            margin-bottom: 0px;
+        }
+
+  </style>
+</head>
+<body>
+
+
+   <div class="navbar">
+    <ul> 
+        <li> <img src="assets/images/logo.png" alt="PAKYAW" style="width: 70px; height: 50px;"> <h1> PAKYAW</h1>
+        </li> 
+
+        <div class="right">
+         
+        <li>
+            <button class="login-button" onclick="toggleLoginForm()">Login</button>
+        </li>
+      </div>
+    </ul>
+
+
+   </div>
+
+
+   <div class="login-container" id="loginForm" >
+    <br>
+    <h4>Administrator</h4>
+    <a> Enter Credentials to Log in</a>
+    <br>
+    <form id="LoginForm">
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <p id="Error"></p><br>
+        <button>Login</button>
+    </form>
+</div>
+<footer class="footer">
+    <a href="https://www.flaticon.com/free-icons/1st-place" style="color: black;" title="1st place icons">1st place icons created by Md Tanvirul Haque - Flaticon</a>
+</footer>
+</body>
+
+
+
+
+
+
+<script>
+    // Array of image paths
+    const images = [
+        'assets/images/avatar/ormoc.jpg',
+        'assets/images/avatar/ormoc2.jpg',
+        'assets/images/avatar/ormoc3.jpg',
+        'assets/images/avatar/ormoc4.jpg',
+        'assets/images/avatar/ormoc5.jpg',
+        'assets/images/avatar/ormoc6.jpg',
+        'assets/images/avatar/ormoc7.jpg',
+        'assets/images/avatar/ormoc8.jpg',
+        'assets/images/avatar/ormoc9.jpg',
+        'assets/images/avatar/ormoc10.jpg'
+        ];
+
+    let currentIndex = 0;
+
+    function changeBackgroundImage() {
+        document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+        currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+    }
+
+    // Change the background image every second (1000 milliseconds)
+    setInterval(changeBackgroundImage, 1000);
+
+    // Initial background image
+    changeBackgroundImage();
+
+
+
+
+       // Toggle login form visibility
+    function toggleLoginForm() {
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm.style.display === 'none' || loginForm.style.display === '') {
+            loginForm.style.display = 'block';
+        } else {
+            loginForm.style.display = 'none';
+        }
+    }
+</script>
+<script src="bundle9.js"></script>
+</html>

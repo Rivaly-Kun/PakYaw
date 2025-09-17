@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Dashboard</title>
+    
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+    
+    <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+    <style>
+        * {
+             box-sizing: border-box;
+             margin: 0;
+             padding: 0;
+         }
+         body{
+            overflow-y: hidden;
+            overflow-x: hidden;
+         }
+          
+         
+         .container {
+             display: flex;
+             flex-direction: row;
+             width: 100%;
+             height: 100vh;
+             max-width: 100%;
+             background-color: white;
+         }
+         .sidebar {
+             flex: 0 0 20%;
+             max-width: 20%;
+             min-width: 200px;
+             height: 100%;
+             border-right: 1px solid #ddd;
+             background-color: #f8f9fa;
+         }
+         .sidebar h2 {
+             padding: 15px 10px;
+             margin: 0;
+             cursor: pointer;
+             background-color: #007BFF;
+             color: white;
+             text-align: center;
+             transition: background-color 0.3s;
+         }
+         .sidebar h2:hover, .sidebar h2.active {
+             background-color: #0056b3;
+         }
+         .content {
+             flex: 1;
+             padding: 20px;
+             overflow-y: auto;
+             height: 100vh;
+         }
+         .section-header {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             margin-bottom: 20px;
+         }
+         .section-header h2 {
+             margin: 0;
+             color: #333;
+         }
+         .search-bar {
+             padding: 8px;
+             width: 100%;
+             max-width: 300px;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+         }
+         table {
+             width: 100%;
+             border-collapse: collapse;
+             margin-top: 20px;
+             font-size: 1rem;
+         }
+         th, td {
+             padding: 10px;
+             text-align: left;
+             border: 1px solid #ddd;
+         }
+         th {
+             background-color: #f4f4f4;
+         }
+         .no-data {
+             text-align: center;
+             padding: 20px;
+         }
+         @media screen and (max-width: 768px) {
+             .sidebar {
+                 flex: 0 0 30%;
+                 max-width: 30%;
+             }
+             .content {
+                 padding: 10px;
+             }
+         }
+         .heightScreen{height: 90vh;}
+         #reportTable{width: 100%;}
+         #performingVTypes{width: 100%;}
+         .card23 {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
+        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+        border-radius: 8px; /* Optional: Rounds the corners of the card */
+        background-color: lightblue;
+    }
+    .custom-card {
+    width:90%; 
+    min-height: 40px;/* Set your desired width here */
+}
+        #map {
+            height: 270px;
+            width: 100%;
+        }
+        .controls {
+            padding: 10px;
+            padding-top: 0px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .parent{
+            display: flex;
+        }
+     </style>
+    
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+ <div id="app">
+    <div id="sidebar" class='active'>
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                <img src="assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+            </div>
+
+
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    
+                    
+                    <li class='sidebar-title'>Main Menu</li>
+                    
+                    
+                    
+                    <li class="sidebar-item  ">
+
+                        <a href="index.html" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i> 
+                            <span>Dashboard</span>
+                        </a>
+
+                        
+                    </li>
+                    
+                    
+                    
+                    
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>File maintainance</span>
+                        </a>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li>
+                                <a href="file maintainance/drivers.html">Drivers</a>
+                            </li>
+                            <li>
+                                <a href="file maintainance/fleetOwner.html">Fleet Owner</a>
+                            </li>
+                            <li>
+                                <a href="file maintainance/Passenger.html" >Passenger</a>
+                            </li>
+                            
+                            <li>
+                                <a href="file maintainance/vehicleT.html">Vehicle type</a>
+                            </li>
+                            <li>
+                                <a href="file maintainance/utilities.html">Promos</a>
+                            </li>
+                            <li>
+                                <a href="file maintainance/discount.html">Discounts</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+
+                    
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>Utilities</span>
+                        </a>
+
+                        
+                        <ul class="submenu ">
+                            
+                          
+                            
+                            <li>
+                                <a href="file maintainance/driverDocumentRequirements.html"> Driver Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="file maintainance/fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="/system/utilities/ChargeAndKm.html">Charge/Base Km</a>
+                            </li>
+                            <li>
+                                <a href="/system/utilities/Tax.html" >Tax</a>
+                            </li>
+                            
+
+                            
+                        </ul>
+                        
+                    </li>
+
+
+
+                    
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="briefcase" width="20"></i> 
+                                <span>Reports</span>
+                            </a>
+
+                            
+                            <ul class="submenu">
+
+                                <li>
+                                    <a href="reports/report.html">Admin Logs</a>
+                                </li>
+                                <li>
+                                    <a href="/system/reports/report-submenu/completedRides.html">Completed Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="/system/reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                                </li>
+
+                                <li>
+                                    <a href="/system/reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                                </li>
+                                <li>
+                                    <a href="reports/report-submenu/taxReport.html">Tax Reports</a>
+                                </li>
+                                <li>
+                                    <a href="/system/reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                                </li>
+                            </ul>
+                            
+                        </li>
+
+                </ul>
+
+
+            </div>
+
+
+
+
+            
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div id="main">
+    <nav class="navbar navbar-header navbar-expand navbar-light">
+
+        <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                <li class="dropdown nav-icon">
+                    <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                        <div class="d-lg-inline-block" style="color:white;">
+                            <i data-feather="bell"></i>
+                             <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                        <h6 class='py-2 px-4'>Notifications</h6>
+                        <ul class="list-group rounded-none">
+                            <div id="emptyOrNot">
+                            <li class="list-group-item border-0 align-items-start">
+                                <div class="avatar bg-success me-3">
+                                    <span class="avatar-content"><i data-feather="bell"></i></span>
+                                </div>
+                                <div>
+                                    <h6 class='text-bold' id="dateNew">New Order</h6>
+                                    <p class='text-xs' id="message">
+                                        An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                    </p>
+                                </div>
+                            </li>
+                        </div>
+                            <li class="list-group-item border-0 align-items-start">
+                                <button class="btn btn-primary btn-sm" onclick="location.href='notification.html'">See All</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown nav-icon me-2">
+                    <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <div class="d-lg-inline-block" style="color:white;">
+                            <i data-feather="mail"></i>
+                            <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Reports</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot2">
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <div class="avatar bg-success me-3">
+                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                        </div>
+                                        <div>
+                                            <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                            <p class='text-xs' id="message2">
+                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                            </p>
+                                        </div>
+                                    </li>
+                                </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-sm btn-primary" onclick="location.href='message.html'">See All</button>
+                                </li>
+                            </ul>
+
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <!--<div class="avatar me-1">
+                            <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                        </div>-->
+                        <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="account.html"><i data-feather="user"></i> Account</a>
+                        <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                        <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                        <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card" style="margin-bottom: 0px; height: 100vh;">
+    <div class="heightScreen">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <h4 class="card-title"  style="margin-top: 6px; margin-right: 20px;" id="tripId">Sample</h4>
+            </div>
+            </div>
+            <div class="card-body px-4 pb-6">
+                <section id="basic-horizontal-layout">
+                    <div class="row match-height" style="height: 19vh;">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header" style="padding-bottom: 0px;">
+                                    <h2>Driver</h2>
+                                </div>
+                                <div class="card-body d-flex">
+                                    <img src="https://via.placeholder.com/40" id="driverProfile" class="img-circle" style="height: 50px; width: 50px;">
+                                    <h3 style="margin-top: 10px;" id="driverName">Name</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header" style="padding-bottom: 0px;">
+                                    <h2>Passenger</h2>
+                                </div>
+                                <div class="card-body d-flex">
+                                    <img src="https://via.placeholder.com/40" id="passengerProfile" class="img-circle" style="height: 50px; width: 50px;">
+                                    <h3 style="margin-top: 10px;" id="passengerName">Name</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+    </div>
+    <div class="card-body px-4 pb-6">
+        <div class="card">
+            <div class="card-body" style="padding-top: 0px; height: 58vh;">
+                <section id="basic-horizontal-layout">
+                    <div class="row match-height">
+                        <div class="col-md-6 col-12">
+                            <div class="card-header" style="padding-bottom: 5px;">
+                                <h2>Trip Details</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="parent">
+                                    <div style="flex: 1;">
+                                        <h6 id="rating">Rating:</h6>
+                                        <h6 id="distance">Distance:</h6>
+                                        <h6 id="duration">Duration:</h6>
+                                        <h6 id="fare">Fare:</h6>
+                                        <h6 id="promo">Promo:</h6>
+                                        <h6 id="discount">Discount:</h6>
+                                        <h6 id="paymentMethod">Payment method:</h6>
+                                        <h6 id="status">Status:</h6>
+                                        <h6 id="createdTime">Created Time:</h6>
+                                        <h6>Selected Vehicle:</h6>
+                                        <div class="card" style="width: fit-content;">
+                                            <div class="card-body d-flex" style="padding-top: 15px; padding-bottom: 10px;">
+                                                <img src="https://via.placeholder.com/40" id="vehicleImg" class="img-circle" style="height: 50px; width: 50px;">
+                                                <div>
+                                                    <h5 id="model">Model: Somethign</h5>
+                                                    <h5 id="type">Type: Somethign</h5>
+                                                </div>
+                                                <h3 id="n/a"></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="flex: 0.5;">
+                                        <h6 id="notes">Notes:</h6>
+                                        <h6>Driver Selfie:</h6>
+                                        <div id="verSelfie">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card-header"  style="padding-bottom: 5px;">
+                                <h2>Route</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="controls">
+                                    <span id="routeText">Original route</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="routeToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+
+
+</script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIyUbQitpmfFPwOXujC2oHS0NAU1XJjGs&loading=async&libraries=maps&libraries=marker">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="assets/js/feather-icons/feather.min.js"></script>
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+<script src="assets/vendors/chartjs/Chart.min.js"></script>
+<script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+<script src="/system/bundle10.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="bundle20.js"></script>
+
+</body></html>

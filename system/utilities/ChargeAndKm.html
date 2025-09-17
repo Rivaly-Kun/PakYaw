@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Dashboard</title>
+    
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    
+    
+    <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
+    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+
+
+    <style>
+        body{margin-left:10px;  overflow-y: hidden;}
+        .heightScreen{height: 90vh;}
+        .margining{
+            width: 40%;
+        }
+        .col-md-4{
+            width: 40%;
+        }
+        .success-dialog {
+        padding: 0;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .success-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .dialog-content {
+        width: 100%;
+    }
+
+    .dialog-header {
+        background-color: #39da8a;  /* Bootstrap danger color */
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+    .dialog-header2 {
+        background-color: #ff5b5c;  /* Bootstrap danger color */
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .dialog-header h5 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.25rem;
+    }
+
+    .close-button:hover {
+        opacity: 0.8;
+    }
+
+    .dialog-body {
+        padding: 1rem;
+    }
+
+    .dialog-body h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+    </style>
+    
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+ <div id="app">
+    <div id="sidebar" class='active'>
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                <img src="../assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+            </div>
+
+
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    
+                    
+                    <li class='sidebar-title'>Main Menu</li>
+                    
+                    
+                    
+                    <li class="sidebar-item  ">
+
+                        <a href="../index.html" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i> 
+                            <span>Dashboard</span>
+                        </a>
+
+                        
+                    </li>
+                    
+                    
+                    
+                    
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>File maintainance</span>
+                        </a>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li>
+                                <a href="../file maintainance/drivers.html">Drivers</a>
+                            </li>
+                            <li>
+                                <a href="../file maintainance/fleetOwner.html">Fleet Owner</a>
+                            </li>
+                            <li>
+                                <a href="../file maintainance/Passenger.html" >Passenger</a>
+                            </li>
+                            
+                            <li>
+                                <a href="../file maintainance/vehicleT.html">Vehicle type</a>
+                            </li>
+                            <li>
+                                <a href="../file maintainance/utilities.html">Promos</a>
+                            </li>
+                            <li>
+                                <a href="../file maintainance/discount.html">Discounts</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+
+                    
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>Utilities</span>
+                        </a>
+
+                        
+                        <ul class="submenu active">
+                            
+                            <li>
+                                <a href="../file maintainance/driverDocumentRequirements.html"> Driver Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="../file maintainance/fleetOwnerDocRequirements.html">Fleet Owner Document Requirements</a>
+                            </li>
+                            <li>
+                                <a href="../utilities/ChargeAndKm.html" style="color: #053382;">Charge/Base Km</a>
+                            </li>
+                            <li>
+                                <a href="../utilities/Tax.html" >Tax</a>
+                            </li>
+                            
+
+                            
+                        </ul>
+                        
+                    </li>
+
+
+
+                    
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="briefcase" width="20"></i> 
+                                <span>Reports</span>
+                            </a>
+
+                            
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="../reports/report.html">Admin Logs</a>
+                                </li>
+                                <li>
+                                    <a href="../reports/report-submenu/completedRides.html" >Completed Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="../reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                                </li>
+
+                                <li>
+                                    <a href="../reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="../reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                                </li>
+                            </ul>
+                            
+                        </li>
+
+                </ul>
+
+
+            </div>
+
+
+
+
+            
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div id="main">
+    <nav class="navbar navbar-header navbar-expand navbar-light">
+
+        <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                <li class="dropdown nav-icon">
+                    <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                        <div class="d-lg-inline-block" style="color:white;">
+                            <i data-feather="bell"></i>
+                             <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                        <h6 class='py-2 px-4'>Notifications</h6>
+                        <ul class="list-group rounded-none">
+                            <div id="emptyOrNot">
+                            <li class="list-group-item border-0 align-items-start">
+                                <div class="avatar bg-success me-3">
+                                    <span class="avatar-content"><i data-feather="bell"></i></span>
+                                </div>
+                                <div>
+                                    <h6 class='text-bold' id="dateNew">New Order</h6>
+                                    <p class='text-xs' id="message">
+                                        An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                    </p>
+                                </div>
+                            </li>
+                        </div>
+                            <li class="list-group-item border-0 align-items-start">
+                                <button class="btn btn-primary btn-sm" onclick="location.href='../notification.html'">See All</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown nav-icon me-2">
+                    <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <div class="d-lg-inline-block" style="color:white;">
+                            <i data-feather="mail"></i>
+                            <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Reports</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot2">
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <div class="avatar bg-success me-3">
+                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                        </div>
+                                        <div>
+                                            <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                            <p class='text-xs' id="message2">
+                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                            </p>
+                                        </div>
+                                    </li>
+                                </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-sm btn-primary" onclick="location.href='../message.html'">See All</button>
+                                </li>
+                            </ul>
+
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <!--<div class="avatar me-1">
+                            <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                        </div>-->
+                        <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="../account.html"><i data-feather="user"></i> Account</a>
+                        <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                        <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                        <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</nav>
+<div class="main-content container-fluid">
+    <dialog id="success" class="success-dialog">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <h5 style="color: white;">Success</h5>
+                <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <h1>Successfully Updated.</h1>
+            </div>
+        </div>
+    </dialog>
+    <dialog id="danger" class="success-dialog">
+        <div class="dialog-content">
+            <div class="dialog-header2">
+                <h5 style="color: white;">Error</h5>
+                <button type="button" class="close-button" onclick="this.closest('dialog').close()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <h1>Error Occured.</h1>
+            </div>
+        </div>
+    </dialog>
+    <section id="basic-horizontal-layout">
+        <div class="row match-height">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Cancellation Charge</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>This is where you can update the cancellation charge for passengers.
+                        </h5>
+                        <form class="form form-horizontal" id="chargeForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4"><h5>Charge: </h5></div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">₱</span>
+                                        <div class="margining">
+                                            <input type="number" aria-label="Amount (to the nearest pesos)" class="form-control" id="charge" max="60" min="0" step="0.01" name="charge" required>
+                                        </div>
+                                        <button class="btn btn-primary" id="updateCharge">Save</button>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Base KM</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Base Kilometer is the boundary for when the rate per kilometer is applied to the base rate.
+                        </h5>
+                        <form class="form form-horizontal" id="baseKmForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4"><h5>Base kilometer: </h5></div>
+                                    <div class="input-group mb-3">
+                                        <div class="margining">
+                                            <input type="number" class="form-control" id="baseKm" max="5" min="1" step="0.01" name="baseKm" required>
+                                        </div>
+                                        <span class="input-group-text">km</span>
+                                        <button class="btn btn-primary" id="updateBaseKm">Save</button>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="basic-horizontal-layout">
+        <div class="row match-height">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Emergency Phone number</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>This is where you can update the Emergency phone number that passengers can use.
+                        </h5>
+                        <form class="form form-horizontal" id="phoneForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4"><h5>Phone number: </h5></div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">+63</span>
+                                        <div class="margining">
+                                            <input type="number" aria-label="Correct phone number" class="form-control" id="phoneNumber" maxlength="10" name="phoneNumber" required>
+                                        </div>
+                                        <button class="btn btn-primary" id="updatePhone">Save</button>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Application Charge</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>This is where you can update the Application charge percentage that drivers will get charged for in their trips.
+                        </h5>
+                        <form class="form form-horizontal" id="appChargeForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4"><h5>App Charge: </h5></div>
+                                    <div class="input-group mb-3">
+                                        <div class="margining">
+                                            <input type="number" aria-label="Correct phone number" class="form-control" id="appCharge" min="0" max="100" name="appCharge" required>
+                                        </div>
+                                        <span class="input-group-text">%</span>
+                                        <button class="btn btn-primary" id="updateAppCharge">Save</button>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+
+
+
+
+<footer>
+    <div class="footer clearfix mb-0 text-muted">
+        <div class="float-start">
+            
+        </div>
+        <div class="float-end">
+         <!-- <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a href="https://saugi.me">Saugi</a></p> -->
+         
+     </div>
+ </div>
+</footer>
+</div>
+</div>
+<script src="../assets/js/feather-icons/feather.min.js"></script>
+<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/vendors/chartjs/Chart.min.js"></script>
+<script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/js/pages/dashboard.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../bundle13.js"></script>
+<script src="../bundle10.js"></script>
+
+</body></html>

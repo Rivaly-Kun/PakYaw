@@ -1,0 +1,263 @@
+import { initializeApp } from "firebase/app"
+import { getFirestore, 
+    getDocs, getDoc, doc, collection, query, limit, 
+    onSnapshot, updateDoc, addDoc, Timestamp } from "firebase/firestore"
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA6_3d88atEhHcUA0UjDsLxzZ0pEhJgA9c",
+    authDomain: "ride-hailing-app-68e81.firebaseapp.com",
+    projectId: "ride-hailing-app-68e81",
+    storageBucket: "ride-hailing-app-68e81.appspot.com",
+    messagingSenderId: "704173359839",
+    appId: "1:704173359839:web:84bc81ebbc2253b8fb5f6a",
+    measurementId: "G-SGV6EXYW9M"
+};
+    
+initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth();
+let adminId = '';
+onAuthStateChanged(auth, user => {
+    adminId = user.uid;
+});
+const driversCol = collection(db, "Driver");
+let array = [];
+const driverReqCol = collection(db, 'DriverDocumentRequirements');
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const userId = urlParams.get('driverUserId');
+onSnapshot(driverReqCol, (snapshot) => {
+  let count = 0;
+  snapshot.forEach((entry) => {
+    array[count] = entry.id;
+    count++;
+  })
+  console.log(array[0]);
+  getDriver(userId);
+});
+
+function getDriver(load){
+    const driverDocRef = doc(db, 'Driver', load);
+    onSnapshot(driverDocRef, (doc) => {
+
+        document.getElementById('Drivername').innerText = `Name: ${doc.get('name')}`;
+        document.getElementById('Contact').innerText = `Contact: ${doc.get('phone_number') ?? 'N/A'}`;
+        document.getElementById('Email').innerText = `Email: ${doc.get('email') ?? 'N/A'}`;
+        document.getElementById('profile_pic').innerHTML = `<img src=${doc.get('profile_pic') == '' ? "https://via.placeholder.com/40" : doc.get('profile_pic')} alt="Dale" width="100" height="100"><br><br><h4 id="Rating">${doc.get('rating').toFixed(1)}</h4><h6 id="Rating">${ratingSummary(doc.get('rating'))}`;
+        document.getElementById('Status').innerHTML = `Status: ${doc.get('onlineStatus') == 'online' ? '<span class="badge bg-success">Online</span>' : '<span class="badge bg-danger">Offline</span>'}`;
+        var location = doc.get('location');
+        initMap(location['geopoint']);
+        
+    })
+    const driversDocumentsRef = collection(driverDocRef, 'DriversDocuments');
+    const docRef = query(driversDocumentsRef, limit(1));
+    onSnapshot(docRef, (snapshot) => {
+        snapshot.forEach((doc) => {
+            renderTable(doc);
+        })
+    });
+}
+
+function renderTable(data){
+    const container = document.getElementById('driverRequirements');
+    container.innerHTML = '';
+    for(let i = 0; i < array.length; i++){
+        const item = document.createElement('div');
+        if(data.data()[`${array[i]}`] == undefined){
+            item.innerHTML = `<div class="card card3" style="width: fit-content;">
+                                        <div class="card-header  d-flex justify-content-between align-items-center">
+                                            <div class="d-flex">
+                                                <h4>${array[i]}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="width: fit-content;" id="${array[i]}">
+                                            <div style="margin-bottom: 22px; width:200px; height:272px">
+                                                <p>Fleet Owner Has not submitted this document.</p>   
+                                            </div>
+                                            <span class="badge bg-danger">Unverified</span>
+                                            <br><br>
+                                            <div style="height: 100px"> 
+                                            </div>
+                                            <button class="btn btn-light" data-id="${array[i]}">Verify</button>             
+                                        </div>
+                                    </div>`;
+                                    container.appendChild(item);
+        }else{
+            item.innerHTML = `<div class="card card3" style="width: fit-content;">
+                                    <div class="card-header  d-flex justify-content-between align-items-center">
+                                        <div class="d-flex">
+                                            <h4>${array[i]}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" style="width: fit-content;" id="${array[i]}">
+                                        ${isImageOrPdf(data.data()[`${array[i]}`].URL) == 'Image' ? `
+                                            <div class="card" style="margin-bottom: 22px; height: 272px; width: 200px;">
+                                                <img src=${data.data()[`${array[i]}`].URL == '' ? "https://via.placeholder.com/40" : data.data()[`${array[i]}`].URL} alt="driverLicensePic" width="200" height="270">
+                                            </div>` : 
+                                            `<div style="margin-bottom: 22px; width:200px; height:272px">
+                                                    ${data.data()[`${array[i]}`].URL != '' ? `<a href="${data.data()[`${array[i]}`].URL}" target="_blank" download>View or Download ${array[i]}.pdf</a>` : 
+                                                    '<p>Fleet Owner Has not submitted this document.</p>'}
+                                                    
+                                                </div>`
+                                        }
+                                        ${data.data()[`${array[i]}`].Verified ? '<span class="badge bg-success">Verified</span>' : '<span class="badge bg-danger">Unverified</span>'}
+                                        <br><br>
+                                        <div style="height: 100px">
+                                            ${data.data()[`${array[i]}`].Identification != null ? `<p>Identification: ${data.data()[`${array[i]}`].Identification}</p>` : ''}
+                                            ${data.data()[`${array[i]}`].IssuanceDate != null ? `<p>Issuance date: ${formatTimestampIntl(data.data()[`${array[i]}`].IssuanceDate)}</p>`: ''}
+                                            ${data.data()[`${array[i]}`].ExpiryDate != null ? `<p>Issuance date: ${formatTimestampIntl(data.data()[`${array[i]}`].ExpiryDate)}</p>` : ''} 
+                                        </div>
+                                        ${!data.data()[`${array[i]}`].Verified ? `<button class="btn ${data.data()[`${array[i]}`].URL != '' ? 'btn-primary verify' : 'btn-light'}" data-id="${array[i]}">Verify</button>` : ''}             
+                                    </div>
+                                </div>`;
+                                container.appendChild(item);
+        }
+    }
+    feather.replace();
+
+    document.querySelector('#driverRequirements').addEventListener('click', async function(e){
+        if(e.target.classList.contains('verify')){
+            const req = e.target.getAttribute('data-id');
+            const driverDocRef = doc(db, 'Driver', userId);
+            const driversDocumentsRef = collection(driverDocRef, 'DriversDocuments');
+            const docRef = query(driversDocumentsRef, limit(1));
+            const querySnapshot = await getDocs(docRef);
+            const docToUpdate = querySnapshot.docs[0].ref; 
+            await updateDoc(docToUpdate, {
+                [`${req}.Verified`]:true
+            }).then(async () => {
+                await addDoc(collection(db, 'AdminLogs'), {
+                    user_id: adminId,
+                    category: 'Drivers Information',
+                    action: `User-${adminId.substring(0,8)} Verified ${req} of Driver-${userId.substring(0, 8)}`,
+                    actionTime: Timestamp.now(),
+                });
+            })
+        }
+    })
+
+}
+
+
+
+function ratingSummary(rating){
+    if(rating < 1){
+        return 'Bad';
+    }
+    if(rating < 2){
+        return 'Subpar';
+    }
+    if(rating < 3){
+        return 'Okay';
+    }
+    if(rating < 4){
+        return 'Good';
+    }
+    if(rating <= 5){
+        return 'Amazing';
+    }
+
+}
+
+function isImageOrPdf(url) {
+    // Extract the file extension
+    const fileExtension = url.split('.').pop().split('?')[0].toLowerCase();
+
+    // Define image and PDF extensions
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const pdfExtension = 'pdf';
+
+    // Check if the file is an image
+    if (imageExtensions.includes(fileExtension)) {
+        return 'Image';
+    }
+    // Check if the file is a PDF
+    else if (fileExtension === pdfExtension) {
+        return 'PDF';
+    } 
+    // If the file is neither, return unknown
+    else {
+        return 'Unknown';
+    }
+}
+
+// document.getElementById('verifyDriverLicense').onclick = async function(event) {
+//     event.preventDefault();
+//     const driverDocRef = doc(db, 'Driver', userId);
+//     const driversDocumentsRef = collection(driverDocRef, 'DriversDocuments');
+//     const docRef = query(driversDocumentsRef, limit(1));
+//     const querySnapshot = await getDocs(docRef);
+//     const docToUpdate = querySnapshot.docs[0].ref; 
+//     await updateDoc(docToUpdate, {
+//         driverLicenseVerified: true
+//     })
+// }
+// document.getElementById('verifyPOC').onclick = async function(event) {
+//     event.preventDefault();
+//     const driverDocRef = doc(db, 'Driver', userId);
+//     const driversDocumentsRef = collection(driverDocRef, 'DriversDocuments');
+//     const docRef = query(driversDocumentsRef, limit(1));
+//     const querySnapshot = await getDocs(docRef);
+//     const docToUpdate = querySnapshot.docs[0].ref; 
+//     await updateDoc(docToUpdate, {
+//         proofOfCitizenshipVerified: true
+//     })
+// }
+// document.getElementById('verifyNBI').onclick = async function(event) {
+//     event.preventDefault();
+//     const driverDocRef = doc(db, 'Driver', userId);
+//     const driversDocumentsRef = collection(driverDocRef, 'DriversDocuments');
+//     const docRef = query(driversDocumentsRef, limit(1));
+//     const querySnapshot = await getDocs(docRef);
+//     const docToUpdate = querySnapshot.docs[0].ref; 
+//     await updateDoc(docToUpdate, {
+//         nbiClearanceVerified: true
+//     })
+// }
+
+document.getElementById('driverDocsButton').onclick = function(event){
+    event.preventDefault();
+    window.location.href = `driversIn.html?driverUserId=${userId}#drivers`;
+}
+
+document.getElementById('vehiclesButton').onclick = function(event){
+    event.preventDefault();
+    window.location.href = `vehicles.html?driverUserId=${userId}#drivers`;
+}
+document.getElementById('activitiesButton').onclick = function(event){
+    event.preventDefault();
+    window.location.href = `activities.html?driverUserId=${userId}#drivers`;
+}
+
+function formatTimestampIntl(timestamp) {
+    const date = timestamp.toDate();
+    return new Intl.DateTimeFormat('en-US').format(date);
+  }
+  let map;
+        let pickupMarker;
+
+        async function initMap(location) {
+            const mapCenter = new google.maps.LatLng(location.latitude, location.longitude);
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: mapCenter,
+                zoomControl: false,
+                mapId: "RouteMap",
+            });
+    
+            const pinBorder = new google.maps.marker.PinElement({
+                background: "#39e75f",
+                glyphColor: "#006400",
+                borderColor: "#006400"
+              });
+
+            // Initialize markers
+            pickupMarker = new google.maps.marker.AdvancedMarkerElement({
+                map,
+                position: mapCenter,
+                title: 'Pickup Location',
+                content: pinBorder.element,
+            });
+        }

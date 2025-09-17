@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Dashboard</title>
+    
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    
+    
+    <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+   <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+
+    <title>Responsive Sidebar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container11 {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+    
+
+        .main-content1 {
+            flex: 3;
+            min-width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .centered-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .add-admin {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .add-admin button {
+            padding: 10px 20px;
+            display: block;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-admin button:hover {
+            background-color: lightgray;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .add-admin {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+   <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+    <div class="sidebar-header">
+        <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+        <img src="../assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+    </div>
+
+
+<div class="sidebar-menu">
+        <ul class="menu">
+            
+                
+                <li class='sidebar-title'>Main Menu</li>
+                
+            
+                
+                <li class="sidebar-item ">
+
+                    <a href="../index.html" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i> 
+                        <span style="font-size: 20px;">Dashboard</span>
+                    </a>
+
+                    
+                </li>
+                
+            
+            
+
+
+<li class="sidebar-item  has-sub">
+
+                    <a href="#" class='sidebar-link'>
+                        <i data-feather="triangle" width="20"></i> 
+                        <span style="font-size: 18px;">File maintenance</span>
+                    </a>
+
+                    
+                    <ul class="submenu ">
+                        <li>
+                            <a href="file maintenance/drivers.html" style="font-size: 15px;">Drivers</a>
+                        </li>
+                        
+                        <li>
+                            <a href="file maintenance/vehicleT.html" style="font-size: 15px;">Vehicle Type</a>
+                        </li>
+                        
+                        <li>
+                            <a href="file maintenance/fleetOwner.html" style="font-size: 15px;">Fleet Owner</a>
+                        </li>
+                    </ul>
+                    
+                </li>
+
+                    
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                    <a href="#" class='sidebar-link'>
+                        <i data-feather="triangle" width="20"></i> 
+                        <span style="font-size: 18px;">Utilities</span>
+                    </a>
+                    
+                    
+                    <ul class="submenu ">
+                        
+                        <li>
+                            <a href="utilities.html"style="font-size: 15px;">Promos</a>
+                        </li>
+
+
+                        <li>
+                            <a href="users.html"style="font-size: 15px;">Users</a>
+                        </li>
+                        <li>
+                            <a href="Fleetowner.html"style="font-size: 15px;">Fleet Owner</a>
+                        </li>
+
+                        <li>
+                            <a href="Passenger.html"style="font-size: 15px;">Passenger</a>
+                        </li>
+                        <li>
+                            <a href="Drivers.html"style="font-size: 15px;">Driver</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+
+                        <li class="sidebar-item  has-sub">
+
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="briefcase" width="20"></i> 
+                                <span style="font-size: 18px;">Reports</span>
+                            </a>
+
+                            
+                            <ul class="submenu ">
+
+                              
+                                <li>
+                                    <a href="../reports/report-submenu/CompletedRides.html"style="font-size: 15px;">Completed Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="../reports/report-submenu/CancelledRides.html"style="font-size: 15px;">Cancelled Rides</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="../reports/report-submenu/salesReport.html"style="font-size: 15px;">Sales Reports</a>
+
+                                </li>
+                            </ul>
+                            
+                        </li>
+
+        </ul>
+
+
+
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+</div>
+        </div>
+
+
+
+
+</div>
+        <div id="main">
+            <nav class="navbar navbar-header navbar-expand navbar-light">
+                
+                <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                        <li class="dropdown nav-icon">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="d-lg-inline-block" style="color:white;">
+                                    <i data-feather="bell"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Notifications</h6>
+                                <ul class="list-group rounded-none">
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <div class="avatar bg-success me-3">
+                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                        </div>
+                                        <div>
+                                            <h6 class='text-bold'>New Order</h6>
+                                            <p class='text-xs'>
+                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="dropdown nav-icon me-2">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="d-lg-inline-block" style="color:white;">
+                                    <i data-feather="mail"></i>
+                                </div>
+                            </a>
+                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Notifications</h6>
+                                <ul class="list-group rounded-none">
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <div class="avatar bg-success me-3">
+                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                        </div>
+                                        <div>
+                                            <h6 class='text-bold'>New Order</h6>
+                                            <p class='text-xs'>
+                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                           <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <!--<div class="avatar me-1">
+                                    <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                                </div>-->
+                                <div class="d-none d-md-block d-lg-inline-block" style="color: white;">Hi, User</div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                                <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                                <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container11">
+        
+                <div class="main-content1">
+                    <div class="centered-text">
+                        <h1> ADMIN</h1>
+                    </div>
+        
+                    <!-- Add Admin button -->
+                    <div class="add-admin">
+                        <button><i data-feather="user" width="20"></i> Add Admin</button>
+                    </div>
+        
+                    <!-- Admin Table -->
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Total Passengers</th>
+                                <th>Total Payment</th>
+                                <th>Last Login</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>A001</td>
+                                <td>Admin One</td>
+                                <td>admin1@example.com</td>
+                                <td>Super Admin</td>
+                                <td>50</td>
+                                <td>$500</td>
+                                <td>2024-08-27 10:00 AM</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr>
+                                <td>A002</td>
+                                <td>Admin Two</td>
+                                <td>admin2@example.com</td>
+                                <td>Support Admin</td>
+                                <td>30</td>
+                                <td>$300</td>
+                                <td>2024-08-26 02:30 PM</td>
+                                <td>Active</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+</body>
+</html>
+
+ <script src="../assets/js/feather-icons/feather.min.js"></script>
+    <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    
+    <script src="../assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/js/pages/dashboard.js"></script>
+    <script src="/system/bundle10.js"></script>
+    <script src="../assets/js/main.js"></script>

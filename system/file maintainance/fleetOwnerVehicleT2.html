@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+
+  <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
+
+  <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+
+  <style >
+
+     .form-container {
+        display: flex;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border-color: lightblue;
+        border-style: solid;
+        max-width: 900px;
+        width: 900px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .form-container1 {
+        display: flex;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border-color: lightblue;
+        border-style: solid;
+        max-width: 900px;
+        width: 900px;
+        height: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .card{
+       height: 492px; /* Adjust the height as needed */
+       overflow-x: auto;
+   }
+
+   .form-image {
+    flex: 1;
+    background: url('your-image-url.jpg') center center/cover no-repeat;
+}
+
+.form-content {
+    flex: 2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+</style>
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+  <div id="app">
+    <div id="sidebar" class='active'>
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <!-- <img src="assets/images/logo.png" alt="" srcset=""> -->
+                <img src="../assets/images/logo.png" alt="" style="width: 200px; height: 140px;">
+
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+
+
+                    <li class='sidebar-title'>Main Menu</li>
+
+
+
+                    <li class="sidebar-item  ">
+
+                        <a href="../index.html" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i> 
+                            <span>Dashboard</span>
+                        </a>
+
+
+                    </li>
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>File maintenance</span>
+                        </a>
+
+
+                        <ul class="submenu active">
+
+                            <li>
+                                <a href="drivers.html">Drivers</a>
+                            </li>
+                            <li>
+                                <a href="Passenger.html" >Passenger</a>
+                            </li>
+
+                            <li>
+                                <a href="vehicleT.html">Vehicle type</a>
+                            </li>
+                            <li>
+                                <a href="fleetOwner.html">Fleet Owner</a>
+                            </li>
+                            <li>
+                                <a href="utilities.html">Promos</a>
+                            </li>
+                            <li>
+                                <a href="discount.html">Discounts</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="triangle" width="20"></i> 
+                            <span>Utilities</span>
+                        </a>
+
+
+                        <ul class="submenu ">
+
+
+
+
+                            <li>
+                                <a href="/system/utilities/ChargeAndKm.html" >Charge/Base Km</a>
+                            </li>
+                            <li>
+                                <a href="/system/utilities/Tax.html" >Tax</a>
+                            </li>
+
+
+
+                        </ul>
+
+                    </li>
+
+
+
+
+
+
+
+
+                    <li class="sidebar-item  has-sub">
+
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="briefcase" width="20"></i> 
+                            <span>Reports</span>
+                        </a>
+
+
+                        <ul class="submenu ">
+
+
+                            <li>
+                                <a href="../reports/report-submenu/completedRides.html" >Completed Rides</a>
+                            </li>
+                            
+                            <li>
+                                <a href="../reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
+                            </li>
+
+                            <li>
+                                <a href="../reports/report-submenu/ongoingRides.html">Ongoing Rides</a>
+                            </li>
+                            
+                            <li>
+                                <a href="../reports/report-submenu/salesReport.html">Sales Reports</a>
+
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+    <div id="main">
+        <nav class="navbar navbar-header navbar-expand navbar-light">
+
+            <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                    <li class="dropdown nav-icon">
+                        <a href="#" id="toggleNotification" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="bell"></i>
+                                 <span id="notify" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                            <h6 class='py-2 px-4'>Notifications</h6>
+                            <ul class="list-group rounded-none">
+                                <div id="emptyOrNot">
+                                <li class="list-group-item border-0 align-items-start">
+                                    <div class="avatar bg-success me-3">
+                                        <span class="avatar-content"><i data-feather="bell"></i></span>
+                                    </div>
+                                    <div>
+                                        <h6 class='text-bold' id="dateNew">New Order</h6>
+                                        <p class='text-xs' id="message">
+                                            An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                                <li class="list-group-item border-0 align-items-start">
+                                    <button class="btn btn-primary btn-sm" onclick="location.href='../notification.html'">See All</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-icon me-2">
+                        <a href="#" id="toggleMessage" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-lg-inline-block" style="color:white;">
+                                <i data-feather="mail"></i>
+                                <span id="Message" style="position: absolute; top: 5px; right: 8px; background-color: red; border-radius: 50%; width: 8px; height: 8px; display: none;"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
+                                <h6 class='py-2 px-4'>Reports</h6>
+                                <ul class="list-group rounded-none">
+                                    <div id="emptyOrNot2">
+                                        <li class="list-group-item border-0 align-items-start">
+                                            <div class="avatar bg-success me-3">
+                                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                            </div>
+                                            <div>
+                                                <h6 class='text-bold' id="dateNew2">New Order</h6>
+                                                <p class='text-xs' id="message2">
+                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <li class="list-group-item border-0 align-items-start">
+                                        <button class="btn btn-sm btn-primary" onclick="location.href='../message.html'">See All</button>
+                                    </li>
+                                </ul>
+    
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <!--<div class="avatar me-1">
+                                <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                            </div>-->
+                            <div class="d-none d-md-block d-lg-inline-block" style="color: white;" id="User">Hi, User</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="../account.html"><i data-feather="user"></i> Account</a>
+                            <!--<a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>-->
+                            <!--<a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>-->
+                            <!--<a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="signout"><i data-feather="log-out"></i> Logout</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+</nav>
+
+
+
+
+
+
+
+
+
+            <div class="row mb-4">
+                <div class="card-header align-items-center">
+                    <div class="card">
+
+                        <div class="nav-container">
+                            <h1 class="nav-title">DRIVERS INFORMATION</h1>
+                        </div>
+                        <!--<h3 class='card-heading p-1 pl-3'>DRIVER</h3>-->
+
+
+
+
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Form with Navigation and Buttons</title>
+                            <link rel="stylesheet" href="styles.css">
+                        </head>
+                        <body>
+                            <form>
+                                <div class="container">
+                                    <nav class="left-nav">
+                                        <div class="content1"><button id="profile_pic"> </button><br><br></div>
+                                        <div clss="contents1"><br>
+                                          <p> Name: Driver name </p>
+                                          <p> Contact: 09********* </p>
+                                          <p> Status: </p>
+                                          <br><br>
+
+
+                                          <!--<button type="button" onclick="window.location.href='fleetOwnerDriverIn.html'">Documents</button>-->
+                                          <!-- <button type="button" onclick="window.location.href='fleetOwnerVehicleT2.html'">Vehicles</button>-->
+                                          <!-- <button type="button" onclick="window.location.href='fleetOwnersActivities.html'">Activities</button>-->
+                                      </nav></form></div>
+
+
+
+
+
+
+
+                                      <div class="nav-container">
+                                          <button class="nav-button" id="driverDocsButton" onclick="window.location.href='fleetOwnerDriverIn.html'">Driver Documents</button>
+                                          <button class="nav-button"  id="vehiclesButton" onclick="window.location.href='fleetOwnerVehicleT2.html'">Vehicles</button>
+                                           <button class="nav-button"  id="vehiclesButton"  onclick="window.location.href='activities.html'">Activities</button>
+
+
+
+                                      </div>
+
+
+
+
+
+
+
+
+
+
+
+                                      <div class="container">
+                                         <div class="content1">
+                                          <div class="container441">
+
+
+                                            <div class="box" id="BoxForm" onclick="BoxFormation()">
+
+                                                <img src="../assets/images/avatar/vann.jpg" alt="Image 1" class="box-image">
+                                                <div class="box-content">
+                                                    <p>Model:</p>
+                                                    <p>Make:</p>
+                                                    <p>Plate number:</p>
+
+                                                </div>
+                                                <!--<button class="submit-btn">Deactivate</button>-->
+                                            </div>
+
+                                            <div class="box" id="BoxForm" onclick="BoxFormation()">
+                                                <img src="../assets/images/avatar/vann.jpg" alt="Image 1" class="box-image">
+                                                <div class="box-content">
+                                                 <p>Model:</p>
+                                                 <p>Make:</p>
+                                                 <p>Plate number:</p>
+                                             </div>
+                                             <!--<button class="submit-btn">Deactivate</button>-->
+                                         </div>
+
+
+                                         <div class="box" id="BoxForm" onclick="BoxFormation()">
+                                            <img src="../assets/images/avatar/vann.jpg" alt="Image 1" class="box-image">
+                                            <div class="box-content">
+                                             <p>Model:</p>
+                                             <p>Make:</p>
+                                             <p>Plate number:</p>
+                                         </div>
+                                         <!--<button class="submit-btn">Deactivate</button>-->
+                                     </div>
+
+
+
+                                 </div>
+
+
+
+
+
+
+
+
+                                 <div class="container33" id="listOfVehicles">
+
+
+                                   <div class="content1">
+                                     <a href="#" class="sidebar-link2">
+
+                                        <i data-feather="layout" width="80"></i> 
+                                        <span>Driver records</span>
+                                    </a>
+
+                                    <div class="submenu111">
+                                        <div class="form-container">
+
+                                          <div class="large-box1"><a><img src="https://via.placeholder.com/40" alt="Dale" class="img-circle">PICTURE</a></div>
+
+
+                                          <div class="container55">
+                                            <div class="lf">
+                                                <p>Model:</p>
+                                                <p>Make:</p>
+                                                <p>Plate number:</p>
+                                            </div>
+
+                          <!--  <div class="column right">
+                                <p>Vehicle type:</p>
+                                <p>Capacity:</p>
+                                <p></p>
+                            </div>-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="content1"><br><br>
+                   <a href="#" class="sidebar-link2">
+
+                    <i data-feather="file-text" width="80"></i> 
+                    <span> Documents</span>
+                </a>
+
+
+                <div class="submenu111">
+                    <div class="submenu22">
+
+                     <div class="grid-container1">
+                        <div class="grid-item1"></div>
+                        <p>Vehicle Documents</p>   
+                    </div>
+
+                    <div class="form-container1">
+                     <div class="column left">
+                        <p>This is documents for the driver vehicle</p>
+
+
+
+                        
+
+                        <div class="container555">
+
+                         <div class="content1">
+                            <a href="#" class="sidebar-link1">
+
+                                <i data-feather="file-text" width="80"></i> 
+                                <span>Document 1</span>
+                            </a>
+                            
+                            <ul id="submenu11" class="content22">
+                                <li>
+                                   <div class="large-box"></div>
+                                   <div class="grid-item1"></div>
+                                   <p>Drivers license number: <span id="price"><a href="component-alert.html">number</a></span></p>   
+
+
+                               </li>
+
+
+                               <li>
+                                   <div class="grid-container1">
+                                    <div class="grid-item1"></div>
+                                    <p>Expiry date: <span id="price"><a href="component-alert.html">date</a></span></p>   
+                                </div>
+
+                                
+                            </li>
+
+                            
+                        </ul>
+                    </div>
+
+
+
+
+                    <div class="content1">
+                        <a href="#" class="sidebar-link1">
+                            <i data-feather="file-text" width="30"></i> 
+                            <span>Document 2</span>
+                        </a>
+                        
+                        <ul id="submenu11" class="content22">
+                            <li>
+                                <div class="large-box"></div>
+                                <div class="grid-item1"></div>
+                                <p>Your details: <span id="price"><a href="component-alert.html">click</a></span></p>
+                            </li>
+                            <li>
+                                <p>Your info: <span id="price"><a href="component-alert.html">click</a></span></p>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+
+                    <div class="content1">
+                        <a href="#" class="sidebar-link1">
+                            <i data-feather="file-text" width="30"></i> 
+                            <span>Document 3</span>
+                        </a>
+                        
+                        <ul id="submenu11" class="content22">
+                            <li>
+                                <div class="large-box"></div>
+                                <div class="grid-item1"></div>
+                                <p>Your details: <span id="price"><a href="component-alert.html">click</a></span></p>
+                            </li>
+                            <li>
+                                <p>Your info: <span id="price"><a href="component-alert.html">click</a></span></p>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>    
+</div>
+</div>
+
+
+
+
+       <!-- <div style="padding: 20px 0px 32px 25px;">
+          <details>
+              <summary>Click here to see more details</summary>
+              <p>This is the hidden content that becomes visible when you click on the summary.</p>
+          </details>
+      </div>-->
+
+
+  </div>
+
+
+
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<script>
+    function BoxFormation() {
+        const container33 = document.querySelector('.container33');
+        const container441 = document.querySelector('.container441');
+        
+        // Show .container33
+        container33.style.display = 'flex';
+
+        // Hide .container44
+        container441.style.display = 'none';
+    }
+</script>
+
+
+
+
+
+
+<script src="../assets/js/feather-icons/feather.min.js"></script>
+<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/app.js"></script>
+
+<script src="../assets/vendors/chartjs/Chart.min.js"></script>
+<script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/js/pages/dashboard.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="/system/bundle10.js"></script>
+
+</body>
+</html>
