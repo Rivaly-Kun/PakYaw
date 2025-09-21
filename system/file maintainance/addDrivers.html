@@ -106,7 +106,7 @@
                  padding: 10px;
              }
          }
-         .heightScreen{height: 90vh;}
+         .heightScreen{height: 100vh;}
          #reportTable{width: 100%;}
          #performingVTypes{width: 100%;}
          .card23 {
@@ -471,12 +471,13 @@
 
 
 
-<div class="card">
+<div style="background-color: white !important;">
     <div class="heightScreen" style="overflow-y: auto;">
         <form id="createDriverForm">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">Add Drivers</h4>
-                <div class="d-flex">
+                <h4 class="card-title">Add New Driver</h4>
+                <div class="d-flex align-items-center gap-4">
+                    <div id="recaptcha-container"></div>
                     <button class="btn btn-primary" type="button" id="createDriver"><i data-feather="plus" width="20"></i>Create</button>
                 </div>
                 </div>
@@ -508,7 +509,7 @@
                                             <span class="input-group-text">+63</span>
                                             <input type="tel" class="form-control" id="phone" placeholder="9xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                                         </div>
-                                        <div id="recaptcha-container"></div>
+                                        
                                     </div>
                                 </div>
                                     

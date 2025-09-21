@@ -22,71 +22,74 @@
 
 
     <style>
-        body{
-            overflow-y: hidden;
+        body {
+            /* overflow-y: hidden; */
         }
        .card-body1{
-        max-height: 35%;
-        height: 290px; /* Adjust the height as needed */
-        overflow-y: auto; /* Add a scrollbar if content overflows */
-    }
+            max-height: 35%;
+            height: 290px; 
+            overflow-y: auto; 
+        }
+        .card-statistic {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80%;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+            color: #1f2937; 
+        }
+        .card222 {
+            background: linear-gradient(145deg, #f0fdf4, #d1fae5);
+        }
+        .card222:hover {
+            background: linear-gradient(145deg, #e0f7eb, #c6f6d5);
+        }
+        .card23 {
+            background: linear-gradient(145deg, #e0f2fe, #bae6fd); 
+        }
+        .card23:hover {
+            background: linear-gradient(145deg, #dbeafe, #a5d8ff);
+        }
 
+        .card24 {
+            background: linear-gradient(145deg, #ffe4e1, #ffb4a2); 
+        }
+        .card24:hover {
+            background: linear-gradient(145deg, #ffd6d1, #ff9e87);
+        }
 
+        .card25 {
+            background: linear-gradient(145deg, #fef9c3, #fef08a); 
+        }
+        .card25:hover {
+            background: linear-gradient(145deg, #fef08a, #fde047);
+        }
 
+        .card23:hover,
+        .card24:hover,
+        .card25:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+        }
 
-    .card222 {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
-        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
-        border-radius: 8px; /* Optional: Rounds the corners of the card */
-        background-color: lightgreen;
-        height: 80%;
-    }
+        .card-statistic h3.card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
 
-    .card222:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
-        transform: scale(1.05);
-    }
+        .card-statistic p {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
 
-
-    .card23 {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
-        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
-        border-radius: 8px; /* Optional: Rounds the corners of the card */
-        background-color: lightblue;
-        height: 80%;
-    }
-
-    .card23:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
-        transform: scale(1.05);
-    }
-
-
-    .card24 {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
-        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
-        border-radius: 8px; /* Optional: Rounds the corners of the card */
-        background-color: lightsalmon;
-        height: 80%;
-    }
-
-    .card24:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
-        transform: scale(1.05);
-    }
-
-    .card25 {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Creates a soft shadow */
-        transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
-        border-radius: 8px; /* Optional: Rounds the corners of the card */
-        background-color: yellow;
-        height: 80%;
-    }
-
-    .card25:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 2); /* Enhances the shadow when hovering */
-        transform: scale(1.05);
-    }
 </style>
 
 
@@ -212,14 +215,13 @@
 
                                 <ul class="submenu ">
 
-
                                     <li>
                                         <a href="reports/report.html">Admin Logs</a>
                                     </li>
                                     <li>
                                         <a href="reports/report-submenu/completedRides.html" >Completed Rides</a>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="reports/report-submenu/CancelledRides.html">Cancelled Rides</a>
                                     </li>
